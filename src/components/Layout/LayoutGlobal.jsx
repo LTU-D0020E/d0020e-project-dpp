@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { Header } from '../Global/NavbarGlobal'
 
 export default function LayoutGlobal({
   className,
@@ -17,7 +18,7 @@ export default function LayoutGlobal({
         />
         <meta property='og:description' content={description} />
       </Head>
-
+      <Header />
       <main>
         <>{props.children}</>
       </main>
