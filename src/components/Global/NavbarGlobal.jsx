@@ -16,10 +16,11 @@ export function Header(props) {
             <p className='h-full p-2 font-semibold bg-slate-200 rounded-full text-gray-800 hover:bg-slate-300 transition duration-300 ease-in-out cursor-pointer'>
               Categories
             </p>
-            <p className='h-full p-2 font-semibold bg-slate-200 rounded-full text-gray-800 hover:bg-slate-300 transition duration-300 ease-in-out cursor-pointer'>
+            <p className='h-full p-2 m-5 font-semibold bg-slate-200 rounded-full text-gray-800 hover:bg-slate-300 transition duration-300 ease-in-out cursor-pointer'>
               Resources
             </p>
           </div>
+          <div>test</div>
         </Container>
       </nav>
     </header>
