@@ -18,14 +18,22 @@ export function Header(props) {
     <header className={clsx('z-[150]', props.navClassName)}>
       <nav className='bg-slate-300 p-3'>
         <Container className='flex flex-row h-[52px] justify-between items-center'>
-          <HomeIcon className='h-full p-2 rounded-full text-gray-800 hover:text-gray-600 transition duration-200 ease-in-out cursor-pointer' />
+          <a href='#' className='h-full'>
+            <HomeIcon className='h-full p-2 rounded-full text-gray-800 hover:text-gray-600 transition duration-200 ease-in-out cursor-pointer' />
+          </a>
           <div className='flex flex-row space-x-4 items-center'>
-            <p className='h-full p-2 font-semibold rounded-full text-gray-800 hover:bg-slate-400 transition duration-200 ease-in-out cursor-pointer'>
+            <a
+              href='#'
+              className='nav-links h-full p-2 font-semibold rounded-full transition duration-200 ease-in-out cursor-pointer'
+            >
               Categories
-            </p>
-            <p className='h-full p-2 font-semibold rounded-full text-gray-800 hover:bg-slate-400 transition duration-200 ease-in-out cursor-pointer'>
+            </a>
+            <a
+              href='#'
+              className='nav-links h-full p-2 font-semibold rounded-full transition duration-200 ease-in-out cursor-pointer'
+            >
               Resources
-            </p>
+            </a>
             <Example />
           </div>
         </Container>

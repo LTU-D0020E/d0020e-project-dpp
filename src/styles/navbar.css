@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.nav-links {
+  display: block;
+  position: relative;
+  padding: 0.2em 0;
+}
+
+.nav-links::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 2.5%;
+  width: 95%;
+  height: 2px;
+  background-color: rgb(0, 0, 0);
+  opacity: 0;
+  transition: opacity 300ms, transform 300ms;
+}
+
+/* Scale underline from center */
+.nav-links::after {
+  opacity: 1;
+  transform: scale(0);
+  transform-origin: center;
+}
+
+.nav-links:hover::after,
+.nav-links:focus::after {
+  transform: scale(1);
+}
