@@ -2,12 +2,7 @@ import { useRouter } from 'next/router'
 import { useState } from 'react'
 import clsx from 'clsx'
 import { Container } from '../utils/Container'
-import {
-  HomeIcon,
-  UserCircleIcon,
-  Cog6ToothIcon,
-  ArrowRightOnRectangleIcon,
-} from '@heroicons/react/24/outline'
+import { HomeIcon } from '@heroicons/react/24/outline'
 import Example from '../UI/Forms/UserDropdown'
 
 export function Header(props) {
@@ -21,7 +16,7 @@ export function Header(props) {
           <a href='#' className='h-full'>
             <HomeIcon className='h-full p-2 rounded-full text-gray-800 hover:text-gray-600 transition duration-200 ease-in-out cursor-pointer' />
           </a>
-          <div className='flex flex-row space-x-4 items-center'>
+          <div className='nav-links-container flex flex-row space-x-4 items-center'>
             <a
               href='#'
               className='nav-links h-full p-2 font-semibold rounded-full transition duration-200 ease-in-out cursor-pointer'
