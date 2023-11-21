@@ -8,6 +8,7 @@ import {
   Cog6ToothIcon,
   ArrowRightOnRectangleIcon,
 } from '@heroicons/react/24/outline'
+import Example from '../UI/Forms/UserDropdown'
 
 export function Header(props) {
   const router = useRouter()
@@ -36,21 +37,7 @@ export function Header(props) {
             />
           </div>
 
-          {isElementVisible && (
-            <div className='absolute right-0 h-[300px] w-[200px] mt-2 p-2 bg-slate-300 rounded shadow text-center'>
-              <div className='flex items-center justify-center h-[100px] w-full'>
-                <UserCircleIcon className='h-full p-2 rounded-full text-gray-800' />
-              </div>
-              <div className='flex flex-row items-center'>
-                <Cog6ToothIcon className='h-10 p-2 rounded-full text-gray-800 transition duration-300 ease-in-out cursor-pointer' />
-                <p className='cursor-pointer'>Account settings</p>
-              </div>
-              <div className='flex flex-row items-center'>
-                <ArrowRightOnRectangleIcon className='h-10 p-2 rounded-full text-gray-800 transition duration-300 ease-in-out cursor-pointer' />
-                <p className='cursor-pointer'>Sign out</p>
-              </div>
-            </div>
-          )}
+          <Example />
         </Container>
       </nav>
     </header>
