@@ -1,6 +1,11 @@
 import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
-import { ChevronDownIcon } from '@heroicons/react/20/solid'
+import {
+  UserCircleIcon,
+  Cog6ToothIcon,
+  ArrowRightOnRectangleIcon,
+  ExclamationCircleIcon,
+} from '@heroicons/react/24/outline'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -10,12 +15,8 @@ export default function Example() {
   return (
     <Menu as='div' className='relative inline-block text-left'>
       <div>
-        <Menu.Button className='inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50'>
-          Options
-          <ChevronDownIcon
-            className='-mr-1 h-5 w-5 text-gray-400'
-            aria-hidden='true'
-          />
+        <Menu.Button className='inline-flex w-full justify-center px-3 py-2'>
+          <UserCircleIcon className='h-10 text-gray-800' />
         </Menu.Button>
       </div>
 
@@ -45,7 +46,10 @@ export default function Example() {
                     'block px-4 py-2 text-sm'
                   )}
                 >
-                  Account settings
+                  <div className='flex flex-row space-x-4 items-center'>
+                    <Cog6ToothIcon className='h-5 text-gray-800' />
+                    <p>Account settings</p>
+                  </div>
                 </a>
               )}
             </Menu.Item>
@@ -58,7 +62,10 @@ export default function Example() {
                     'block px-4 py-2 text-sm'
                   )}
                 >
-                  Support
+                  <div className='flex flex-row space-x-4 items-center'>
+                    <ExclamationCircleIcon className='h-5 text-gray-800' />
+                    <p>Example link</p>
+                  </div>
                 </a>
               )}
             </Menu.Item>
@@ -71,7 +78,10 @@ export default function Example() {
                     'block px-4 py-2 text-sm'
                   )}
                 >
-                  License
+                  <div className='flex flex-row space-x-4 items-center'>
+                    <ExclamationCircleIcon className='h-5 text-gray-800' />
+                    <p>Example link</p>
+                  </div>
                 </a>
               )}
             </Menu.Item>
@@ -87,7 +97,10 @@ export default function Example() {
                       'block w-full px-4 py-2 text-left text-sm'
                     )}
                   >
-                    Sign out
+                    <div className='flex flex-row space-x-4 items-center'>
+                      <ArrowRightOnRectangleIcon className='h-5 text-gray-800' />
+                      <p>Sign out</p>
+                    </div>
                   </button>
                 )}
               </Menu.Item>

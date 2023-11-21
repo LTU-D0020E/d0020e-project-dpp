@@ -14,30 +14,20 @@ export function Header(props) {
   const router = useRouter()
   const [isElementVisible, setElementVisibility] = useState(false)
 
-  // Toggle user visibility state
-  const handleUserIconClick = () => {
-    setElementVisibility(!isElementVisible)
-  }
-
   return (
     <header className={clsx('z-[150]', props.navClassName)}>
       <nav className='bg-slate-300 p-3'>
         <Container className='flex flex-row h-[52px] justify-between items-center'>
-          <HomeIcon className='h-full p-2 rounded-full text-gray-800 hover:text-gray-600 transition duration-300 ease-in-out cursor-pointer' />
+          <HomeIcon className='h-full p-2 rounded-full text-gray-800 hover:text-gray-600 transition duration-200 ease-in-out cursor-pointer' />
           <div className='flex flex-row space-x-4 items-center'>
-            <p className='h-full p-2 font-semibold rounded-full text-gray-800 hover:bg-slate-400 transition duration-300 ease-in-out cursor-pointer'>
+            <p className='h-full p-2 font-semibold rounded-full text-gray-800 hover:bg-slate-400 transition duration-200 ease-in-out cursor-pointer'>
               Categories
             </p>
-            <p className='h-full p-2 font-semibold rounded-full text-gray-800 hover:bg-slate-400 transition duration-300 ease-in-out cursor-pointer'>
+            <p className='h-full p-2 font-semibold rounded-full text-gray-800 hover:bg-slate-400 transition duration-200 ease-in-out cursor-pointer'>
               Resources
             </p>
-            <UserCircleIcon
-              className='h-14 p-2 rounded-full text-gray-800 hover:text-gray-600 transition duration-300 ease-in-out cursor-pointer flex-shrink-0'
-              onClick={handleUserIconClick}
-            />
+            <Example />
           </div>
-
-          <Example />
         </Container>
       </nav>
     </header>
