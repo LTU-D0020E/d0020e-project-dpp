@@ -15,7 +15,7 @@
   left: 2.5%;
   width: 95%;
   height: 2px;
-  background-color: rgb(0, 0, 0);
+  background-color: #0d9488;
   opacity: 0;
   transition: opacity 300ms, transform 300ms;
 }

@@ -16,7 +16,7 @@ export default function Example() {
     <Menu as='div' className='relative inline-block text-left'>
       <div>
         <Menu.Button className='inline-flex w-full justify-center px-3 py-2'>
-          <UserIcon className='h-9 text-gray-800 hover:text-slate-600 transition duration-200 ease-in-out' />
+          <UserIcon className='h-9 text-gray-800 hover:text-teal-600 transition duration-200 ease-in-out' />
         </Menu.Button>
       </div>
 
