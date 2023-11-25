@@ -9,14 +9,14 @@ export function Header(props) {
   return (
     <header className={clsx('z-[150]', props.navClassName)}>
       <nav className='pt-4'>
-        <Container className='flex flex-row h-[52px] justify-between items-center'>
-          <HomeIcon className='h-full p-2 bg-slate-200 rounded-full text-gray-800 hover:bg-slate-300 transition duration-300 ease-in-out cursor-pointer' />
+        <Container className='flex h-[52px] flex-row items-center justify-between'>
+          <HomeIcon className='h-full cursor-pointer rounded-full bg-slate-200 p-2 text-gray-800 transition duration-300 ease-in-out hover:bg-slate-300' />
           <SearchBar />
-          <div className='flex flex-row space-x-4 items-center'>
-            <p className='h-full p-2 font-semibold bg-slate-200 rounded-full text-gray-800 hover:bg-slate-300 transition duration-300 ease-in-out cursor-pointer'>
+          <div className='flex flex-row items-center space-x-4'>
+            <p className='h-full cursor-pointer rounded-full bg-slate-200 p-2 font-semibold text-gray-800 transition duration-300 ease-in-out hover:bg-slate-300'>
               Categories
             </p>
-            <p className='h-full p-2 m-5 font-semibold bg-slate-200 rounded-full text-gray-800 hover:bg-slate-300 transition duration-300 ease-in-out cursor-pointer'>
+            <p className='m-5 h-full cursor-pointer rounded-full bg-slate-200 p-2 font-semibold text-gray-800 transition duration-300 ease-in-out hover:bg-slate-300'>
               Resources
             </p>
           </div>
@@ -25,4 +25,8 @@ export function Header(props) {
       </nav>
     </header>
   )
+}
+
+function Hero() {
+  return <div>icon</div>
 }
