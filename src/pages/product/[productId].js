@@ -1,14 +1,17 @@
 import { useRouter } from 'next/router'
 import LayoutGlobal from '@/components/Layout/LayoutGlobal'
 import { Container } from '@/components/utils/Container'
+import { useEffect, useState } from 'react'
 
 function ProductDetails() {
   const router = useRouter()
   const ProductId = router.query.productId
+  const [productData, setProductData] = useState(null)
+
   return (
     <LayoutGlobal>
       <Container className={'pt-20'}>
-        <div className='border-2 rounded-md shadow-md'>
+        <div className='rounded-md border-2 shadow-md'>
           <div className='px-4 py-4'>
             <div className='px-4 sm:px-0'>
               <h3 className='text-base font-semibold leading-7 text-gray-900'>
@@ -64,9 +67,9 @@ function ProductDetails() {
             </div>
           </div>
         </div>
-        <div className='flex flex-row mt-16 content-center'>
-          <div className='rounded-md border-2 w-72 h-56 flex'>
-            <div className='flex px-2 border-b-2'>
+        <div className='mt-16 flex flex-row content-center'>
+          <div className='flex h-56 w-72 rounded-md border-2'>
+            <div className='flex border-b-2 px-2'>
               <dl className=''>
                 <dt>Weight</dt>
               </dl>
