@@ -1,7 +1,7 @@
 import { defaultHandler } from '@/utils/server/api-helpers'
 import { verifyPassword } from '@/utils/server/auth'
 import { generateAuthToken } from '@/utils/server/auth' // Import the token generation function
-
+import { hashPassword } from '@/utils/server/auth'
 import User from '@/models/User'
 
 const signInUser = async (req, res) => {
@@ -17,7 +17,10 @@ const signInUser = async (req, res) => {
     }
 
     // Compare the provided password with the hashed password in the database
-    const passwordMatch = await verifyPassword(password, user.password)
+    const hashedPasswordInput = hashPassword(password)
+    console.log("user", user)
+    console.log("hash", hashedPasswordInput)
+    const passwordMatch = await verifyPassword(hashedPasswordInput, user.password)
 
     if (!passwordMatch) {
       return res.status(401).json({ message: 'Invalid credentials' })

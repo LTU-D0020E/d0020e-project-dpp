@@ -10,6 +10,7 @@ const createUser = async (req, res) => {
     // Check if the user already exists
     const existingUser = await User.findOne({ email })
     if (existingUser) {
+      console.log('user already exists')
       return res.status(409).json({ message: 'User already exists' })
     }
 
@@ -28,7 +29,10 @@ const createUser = async (req, res) => {
     // Save the user
     await user.save()
 
-    // Respond with success
+    // // Generate a JWT token
+    // const authToken = generateAuthToken(user); // Implement this function to generate a token
+
+    // Respond with success and include the token in the response
     return res.status(201).json({ message: 'User created successfully' })
   } catch (error) {
     console.error('Error creating user:', error)
