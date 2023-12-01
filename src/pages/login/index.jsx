@@ -148,8 +148,26 @@ export function AuthForm() {
   }
 
   const handleSignIn = async e => {
-    e.preventDefault()
+  e.preventDefault();
+  try {
+    const response = await fetch('/api/v1/auth/signin', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formSignIn), // Assuming you have a formSignIn object with sign-in data
+    });
+    const data = await response.json();
+    if (response.ok) {
+      // Handle successful sign-in, e.g., redirect or show a success message
+    } else {
+      // Handle errors, e.g., display error message
+    }
+  } catch (error) {
+    console.error('Sign-in failed:', error);
+    // Handle submission error
   }
+}
 
   return (
     <>
