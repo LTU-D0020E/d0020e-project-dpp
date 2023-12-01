@@ -1,15 +1,31 @@
-export default async function logout(req, res) {
-  try {
-    // Clear the user's session (e.g., remove JWT token or session cookie)
-    // You may also want to invalidate the token on the server if necessary
+import { ElementLoader } from '@/components/global/Loaders'
+import { signOut } from 'next-auth/react'
+import { useEffect } from 'react'
 
-    // For example, to clear a cookie:
-    res.setHeader('Set-Cookie', 'yourAuthToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; HttpOnly; SameSite=Strict');
-
-    // Respond with a success message or status code
-    res.status(200).json({ message: 'Logout successful' });
-  } catch (error) {
-    console.error('Logout failed:', error);
-    res.status(500).json({ message: 'Internal server error' });
+export default function ForceLogout() {
+  const logOutHandler = () => {
+    signOut({ redirect: false }).then(() => {
+      // if (window?.Intercom) window.Intercom('shutdown')
+      window.location.href = '/'
+    })
   }
+
+  useEffect(() => {
+    const timer1 = setTimeout(() => {}, 1000)
+
+    const timer2 = setTimeout(() => {
+      logOutHandler()
+    }, 1000)
+
+    return () => clearTimeout(timer1, timer2)
+  }, [])
+
+  //
+
+  return (
+    <div className='absolute z-10 mx-auto flex  h-full w-full flex-col items-center justify-center bg-gray-50'>
+      <ElementLoader />
+      <p className='mt-4 text-gray-600'>Logging out...</p>
+    </div>
+  )
 }
