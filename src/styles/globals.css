@@ -20,3 +20,27 @@
 body {
   background-color: white;
 }
+
+table {
+  font-family: arial, sans-serif;
+  width: 80%;
+}
+
+td,
+th {
+  border-bottom: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #f3f4f6;
+}
+
+tr {
+  transition-duration: 200ms;
+}
+
+tr:not(:nth-child(1)):hover {
+  background-color: #0f8a8086;
+}
