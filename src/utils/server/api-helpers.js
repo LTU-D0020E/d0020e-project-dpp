@@ -1,5 +1,6 @@
 import { connectToDatabase, objectToFieldUpdates } from '@/utils/server/db'
 import { getServerSession } from 'next-auth'
+import NextAuth from 'next-auth/next'
 
 export const DEFAULT_AUTHORIZER = async (options, req, session) => {
   if (options.requiresAuth || options.requiresAdmin) {
@@ -42,7 +43,7 @@ export const defaultHandler = async (
   try {
     await connectToDatabase()
     const handler = handlers[method]
-    const session = await getServerSession(req, res, authOptions)
+    const session = await getServerSession(req, res, NextAuth)
     // default handlers might override options, including authorizer
     if (handler.name === '__defaultFn') {
       return handler(req, res, session)
