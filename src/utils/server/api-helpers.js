@@ -1,6 +1,5 @@
 import { connectToDatabase, objectToFieldUpdates } from '@/utils/server/db'
 import { getServerSession } from 'next-auth'
-import { authOptions } from './auth'
 
 export const DEFAULT_AUTHORIZER = async (options, req, session) => {
   if (options.requiresAuth || options.requiresAdmin) {

@@ -1,4 +1,4 @@
-import { ElementLoader } from '@/components/global/Loaders'
+import { ElementLoader } from '@/components/Global/Loader'
 import { signOut } from 'next-auth/react'
 import { useEffect } from 'react'
 
