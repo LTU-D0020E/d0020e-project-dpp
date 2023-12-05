@@ -95,7 +95,7 @@ import { useEffect, useState } from 'react'
   )
 } */
 
-export function AuthForm() {
+export default function AuthForm() {
   const [isSignUpVisible, setIsSignUpVisible] = useState(false)
   const [formSignUp, setFormSignUp] = useState({
     name: '',
