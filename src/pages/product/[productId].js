@@ -4,9 +4,44 @@ import { Container } from '@/components/utils/Container'
 import { useEffect, useState } from 'react'
 
 function ProductDetails() {
-  const router = useRouter()
+  /*  const router = useRouter()
   const ProductId = router.query.productId
-  const [productData, setProductData] = useState(null)
+  const [productData, setProductData] = useState({
+    _id,
+    id,
+    name,
+    dpp_class,
+    creation_time,
+    privacy,
+  })
+
+  const fetchproduct = async () => {
+    try {
+      // Make a GET request to the API route
+      const response = await fetch('/api/v1/product/export-product')
+
+      // Check if the response is successful (status code 200)
+      if (response.ok) {
+        // Parse the response body as JSON
+        const result = await response.json()
+
+        // Update the component state with the fetched data
+        setData(result)
+      } else {
+        // Handle non-successful responses (e.g., log an error)
+        console.error(
+          'Error fetching data:',
+          response.status,
+          response.statusText
+        )
+      }
+    } catch (error) {
+      // Handle network errors or other exceptions
+      console.error('Error fetching data:', error.message)
+    }
+  }
+
+  fetchproduct()*/
 
   return (
     <LayoutGlobal>
