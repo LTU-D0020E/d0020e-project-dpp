@@ -3,8 +3,67 @@ import LayoutGlobal from '@/components/Layout/LayoutGlobal'
 import { Container } from '@/components/utils/Container'
 import { useEffect, useState } from 'react'
 
-function ProductDetails() {
-  /*  const router = useRouter()
+export async function getServerSideProps(context) {
+  const { productID } = context.params
+
+  const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL //REDO THIS LATER WE CANT HAVE BASE URL SHOULD WORK TO JUST DO /api/v1/product/${productID}
+
+  try {
+    const res = await fetch(`${baseUrl}/api/v1/product/${productID}`) // Use backticks for template literal
+
+    if (!res.ok) {
+      throw new Error(`Failed to fetch product, status: ${res.status}`) // Template literal
+    }
+
+    const productData = await res.json()
+
+    return {
+      props: { product: productData },
+    }
+  } catch (error) {
+    console.error('Error fetching product:', error)
+    return {
+      notFound: true,
+    }
+  }
+}
+
+export default function ProductPage({ product }) {
+  // Function to recursively render product properties, including nested objects/arrays
+  const renderProductData = data => {
+    if (Array.isArray(data)) {
+      return (
+        <ul>
+          {data.map((item, index) => (
+            <li key={index}>{renderProductData(item)}</li>
+          ))}
+        </ul>
+      )
+    } else if (typeof data === 'object' && data !== null) {
+      return (
+        <ul>
+          {Object.entries(data).map(([key, value]) => (
+            <li key={key}>
+              <strong>{key}:</strong> {renderProductData(value)}
+            </li>
+          ))}
+        </ul>
+      )
+    } else {
+      return data.toString()
+    }
+  }
+
+  return (
+    <div>
+      <h1>Product Details</h1>
+      {renderProductData(product)}
+    </div>
+  )
+}
+
+/* function ProductDetails() {
+   const router = useRouter()
   const ProductId = router.query.productId
   const [productData, setProductData] = useState({
     _id,
@@ -41,7 +100,7 @@ function ProductDetails() {
     }
   }
 
-  fetchproduct()*/
+  fetchproduct()
 
   return (
     <LayoutGlobal>
@@ -117,3 +176,4 @@ function ProductDetails() {
 }
 
 export default ProductDetails
+ */
