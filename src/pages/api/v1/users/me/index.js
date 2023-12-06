@@ -1,9 +1,8 @@
 import { defaultHandler } from '@/utils/server/api-helpers'
-import { hashPassword } from '@/utils/server/auth'
 import User from '@/models/User'
 
 // Define handleSignup before using it in the handler
-const createUser = async (req, res) => {
+const getCurrentUser = async (req, res) => {
   try {
     const { name, email, password, role } = req.body
 
@@ -45,7 +44,7 @@ const handler = async (req, res) =>
     req,
     res,
     {
-      POST: createUser,
+      GET: getCurrentUser,
     },
     {
       requiresAuth: false,

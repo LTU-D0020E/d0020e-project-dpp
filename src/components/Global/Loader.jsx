@@ -7,3 +7,11 @@ export function FullPageLoader() {
     </div>
   )
 }
+
+export function ElementLoader(props) {
+  return (
+    <div className={props.className}>
+      <BarLoader color={'bg-blue-300'} size={40} />
+    </div>
+  )
+}
