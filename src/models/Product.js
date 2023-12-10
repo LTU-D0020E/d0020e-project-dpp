@@ -45,4 +45,4 @@ const productSchema = new Schema(
 )
 
 module.exports =
-  mongoose.models.Product || mongoose.model('Product', productSchema)
+  mongoose.models.Product || mongoose.model('product', productSchema)
