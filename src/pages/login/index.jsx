@@ -1,3 +1,5 @@
+import Credentials from 'next-auth/providers/credentials'
+import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
@@ -93,7 +95,7 @@ import { useEffect, useState } from 'react'
   )
 } */
 
-export function AuthForm() {
+export default function AuthForm() {
   const [isSignUpVisible, setIsSignUpVisible] = useState(false)
   const [formSignUp, setFormSignUp] = useState({
     name: '',
@@ -135,12 +137,21 @@ export function AuthForm() {
         },
         body: JSON.stringify(formSignUp),
       })
-      const data = await response.json()
+
       if (response.ok) {
-        // Handle successful signup, e.g., redirect or show a success message
-      } else {
-        // Handle errors, e.g., display error message
+      const data = await response.json();
+      const authToken = data.authToken; // Assuming the token key is 'authToken' in your response
+
+      if (authToken) {
+        // You have received an authentication token
+        console.log('Received auth token:', authToken);
+        // Store the token securely, e.g., in a cookie or local storage
       }
+
+      // Handle successful signup, e.g., redirect or show a success message
+    } else {
+      // Handle errors, e.g., display error message
+    }
     } catch (error) {
       console.error('Signup failed:', error)
       // Handle submission error
@@ -148,8 +159,19 @@ export function AuthForm() {
   }
 
   const handleSignIn = async e => {
-    e.preventDefault()
+  e.preventDefault();
+  try {
+    const result = await signIn('credentials', {
+      redirect: "/",
+      email: formSignIn.email,
+      password:formSignIn.password ,
+    })
+    console.log(result)
+  } catch (error) {
+    console.error('Sign-in failed:', error);
+    // Handle submission error
   }
+}
 
   return (
     <>

@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Head from 'next/head'
 import { useSession } from 'next-auth/react'
 import { AuthLayout } from '@/components/Layout/AuthLayout'
-import { AuthForm } from './login'
+import AuthForm from './login'
 
 export default function Login() {
   return (
