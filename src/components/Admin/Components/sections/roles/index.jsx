@@ -6,24 +6,24 @@ import {
   Cog6ToothIcon,
 } from '@heroicons/react/24/solid'
 
-export default function Users() {
-  const [users, setUsers] = useState([])
+export default function Roles() {
+  const [roles, setRoles] = useState([])
   const [page, setPage] = useState(1)
   const [pageSize, setPageSize] = useState(25)
-  const [userCount, setUserCount] = useState(0)
+  const [roleCount, setRoleCount] = useState(0)
 
   useEffect(() => {
-    const fetchUsers = async () => {
+    const fetchRoles = async () => {
       try {
         const response = await fetch(
-          `/api/v1/admin/users?page=${page}&pageSize=${pageSize}`
+          `/api/v1/admin/roles?page=${page}&pageSize=${pageSize}`
         )
         if (!response.ok) {
           throw new Error('Network response was not ok')
         }
         const data = await response.json()
-        setUsers(data.users)
-        setUserCount(data.totalUsers) // Adjust this line to match the field name
+        setRoles(data.roles)
+        setRoleCount(data.totalRoles) // Adjust this line to match the field name
       } catch (error) {
         console.error('Failed to fetch users:', error)
       }
@@ -38,22 +38,16 @@ export default function Users() {
   }
 
   // Calculate the total number of pages
-  const totalPages = userCount > 0 ? Math.ceil(userCount / pageSize) : 1
-
-  const [expandedRow, setExpandedRow] = useState(null)
-
-  // Function to toggle row expansion
-  const toggleRowExpansion = userId => {
-    setExpandedRow(expandedRow === userId ? null : userId)
-  }
-
+  const totalPages = roleCount > 0 ? Math.ceil(roleCount / pageSize) : 1
+  console.log(roleCount)
+  console.log(roles)
   return (
     <>
       <div className='flex flex-col justify-center px-20 py-10'>
         <div>
           <h1 className='text-3xl font-bold'>Users</h1>
           <p className='text-md font-semibold text-gray-600'>
-            {userCount} users found
+            {roleCount} roles found
           </p>
         </div>
         <div className='pt-10'>
@@ -112,66 +106,43 @@ export default function Users() {
                   </thead>
                   <tbody className='divide-y divide-gray-200'>
                     {users.map(user => (
-                      <>
-                        <tr
-                          key={user.email}
-                          onClick={() => toggleRowExpansion(user._id)}
-                        >
-                          <td className='w-1/5 whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0'>
-                            {user._id}
-                          </td>
-                          <td className='whitespace-nowrap px-3 py-4 text-sm text-gray-500'>
-                            {user.name}
-                          </td>
-                          <td className='whitespace-nowrap px-3 py-4 text-sm text-gray-500'>
-                            {user.email}
-                          </td>
-                          <td className='whitespace-nowrap px-3 py-4 text-sm text-gray-500'>
-                            {user.role}
-                          </td>
-                          <td className='whitespace-nowrap px-3 py-4 text-sm text-gray-500'>
-                            {user.admin ? 'Yes' : 'No'}
-                          </td>
-                          <td className='relative whitespace-nowrap py-4 pl-3 pr-2 text-right  text-sm font-medium sm:pr-0'>
-                            <a
-                              href='#'
-                              className=' text-indigo-600 hover:text-indigo-900'
-                            >
-                              <span className='sr-only'>, {user.name}</span>
-                              <Cog6ToothIcon className=' w-5 ' />
-                            </a>
-                          </td>
-                          <td className='relative whitespace-nowrap py-4 pl-3 pr-2 text-right  text-sm font-medium sm:pr-0'>
-                            <ChevronDownIcon className='w-5' />
-                          </td>
-                        </tr>
-                        {expandedRow === user._id && (
-                          <tr>
-                            <td colSpan='6'>
-                              {/* Add your expandable content here */}
-                              <div>
-                                Additional actions or information for{' '}
-                                {user.name}
-                              </div>
-                              {/* Example: CTA for admins */}
-                              {user.admin && (
-                                <button className='text-indigo-600 hover:text-indigo-900'>
-                                  Admin Action
-                                </button>
-                              )}
-                            </td>
-                          </tr>
-                        )}
-                      </>
+                      <tr key={user.email}>
+                        <td className='w-1/5 whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0'>
+                          {user._id}
+                        </td>
+                        <td className='whitespace-nowrap px-3 py-4 text-sm text-gray-500'>
+                          {user.name}
+                        </td>
+                        <td className='whitespace-nowrap px-3 py-4 text-sm text-gray-500'>
+                          {user.email}
+                        </td>
+                        <td className='whitespace-nowrap px-3 py-4 text-sm text-gray-500'>
+                          {user.role}
+                        </td>
+                        <td className='whitespace-nowrap px-3 py-4 text-sm text-gray-500'>
+                          {user.admin ? 'Yes' : 'No'}
+                        </td>
+                        <td className='relative whitespace-nowrap py-4 pl-3 pr-2 text-right  text-sm font-medium sm:pr-0'>
+                          <a
+                            href='#'
+                            className=' text-indigo-600 hover:text-indigo-900'
+                          >
+                            <span className='sr-only'>, {user.name}</span>
+                            <Cog6ToothIcon className=' w-5 ' />
+                          </a>
+                        </td>
+                        <td className='relative whitespace-nowrap py-4 pl-3 pr-2 text-right  text-sm font-medium sm:pr-0'>
+                          <ChevronDownIcon className='w-5' />
+                        </td>
+                      </tr>
                     ))}
                   </tbody>
                 </table>
               </div>
             </div>
           </div>
-          <div className='flex justify-center space-x-4 font-semibold'>
+          <div className='flex justify-center'>
             <button
-              className='cursor-pointer text-gray-400 transition-all duration-200 ease-in-out hover:text-blue-800'
               onClick={() => setPage(Math.max(page - 1, 1))}
               disabled={page === 1}
             >
@@ -181,7 +152,6 @@ export default function Users() {
               Page {page} of {totalPages}
             </span>
             <button
-              className='cursor-pointer text-gray-400 transition-all duration-200 ease-in-out hover:text-blue-800'
               onClick={() => setPage(Math.min(page + 1, totalPages))}
               disabled={page === totalPages || userCount === 0}
             >
