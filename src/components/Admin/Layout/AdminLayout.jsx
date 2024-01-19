@@ -15,6 +15,7 @@ import {
 import Image from 'next/image'
 import Dashboard from '../Components/sections/dashboard'
 import Users from '../Components/sections/users'
+import Roles from '../Components/sections/roles'
 
 const teams = [
   { id: 1, name: 'Heroicons', href: '#', initial: 'H', current: false },
@@ -40,8 +41,8 @@ export default function AdminLayout() {
         return <Dashboard />
       case 'Users':
         return <Users />
-      case 'Groups':
-        return <Groups />
+      case 'Roles':
+        return <Roles />
       case 'Materials':
         return <Materials />
       case 'Products':
@@ -70,11 +71,11 @@ export default function AdminLayout() {
       onClick: e => handleNavigationClick('Users', e),
     },
     {
-      name: 'Groups',
+      name: 'Roles',
       href: '#',
       icon: UserGroupIcon,
-      current: selectedSection === 'Groups',
-      onClick: e => handleNavigationClick('Groups', e),
+      current: selectedSection === 'Roles',
+      onClick: e => handleNavigationClick('Roles', e),
     },
     {
       name: 'Materials',
