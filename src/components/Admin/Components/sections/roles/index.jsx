@@ -226,7 +226,7 @@ function RoleForm({ formOpen, setFormOpen }) {
                   />
 
                   <TextField
-                    label='Role Name'
+                    label='Decryption Key'
                     name='decryption_key'
                     value={formRole.decryption_key}
                     onChange={handleFormChange}
