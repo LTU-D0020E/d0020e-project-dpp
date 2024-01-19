@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { formatDate } from '@/utils/server/helpers'
 import {
   ArrowDownIcon,
@@ -11,6 +11,7 @@ export default function Users() {
   const [page, setPage] = useState(1)
   const [pageSize, setPageSize] = useState(25)
   const [userCount, setUserCount] = useState(0)
+  const [selectedUser, setSelectedUser] = useState(null)
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -44,152 +45,165 @@ export default function Users() {
 
   // Function to toggle row expansion
   const toggleRowExpansion = userId => {
+    const user = users.find(u => u._id === userId)
+    setSelectedUser(user) // Store the entire user object
     setExpandedRow(expandedRow === userId ? null : userId)
   }
 
+  const handleChangeRole = async (userId, newRole) => {
+    try {
+      // Call your API to change the role
+      // For example: await fetch(`/api/v1/admin/users/${userId}/role`, { method: 'PUT', body: JSON.stringify({ role: newRole }) })
+      // Update the users state with the new role
+      setUsers(
+        users.map(user =>
+          user._id === userId ? { ...user, role: newRole } : user
+        )
+      )
+    } catch (error) {
+      console.error('Failed to change role:', error)
+    }
+  }
+
+  const handleToggleAdmin = async () => {
+    if (!selectedUser) return
+    console.log(selectedUser)
+
+    const updatedUser = { ...selectedUser, admin: !selectedUser.admin }
+
+    try {
+      const res = await fetch(
+        `/api/v1/admin/users/${selectedUser._id}/editAdmin`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(updatedUser),
+        }
+      )
+
+      if (res.ok) {
+        // Update the state
+        setUsers(
+          users.map(user =>
+            user._id === selectedUser._id ? updatedUser : user
+          )
+        )
+        setSelectedUser(null) // reset the selectedUser
+      } else {
+        const errorData = await res.json()
+        throw new Error(
+          errorData.message || 'Failed to update user admin status'
+        )
+      }
+    } catch (error) {
+      console.error('Failed to toggle admin status:', error)
+    }
+  }
+
   return (
-    <>
-      <div className='flex flex-col justify-center px-20 py-10'>
-        <div>
-          <h1 className='text-3xl font-bold'>Users</h1>
-          <p className='text-md font-semibold text-gray-600'>
-            {userCount} users found
-          </p>
-        </div>
-        <div className='pt-10'>
-          <div className='flex flex-row space-x-8 text-lg font-semibold'>
-            <p className='border-b-2 border-blue-600'>All users</p>
-            <p className='text-gray-300'>Admins</p>
-            <p className='text-gray-300'>Workshop</p>
-            <p className='text-gray-300'>Manufacturer</p>
-            <p className='text-gray-300'>Remanufacturer</p>
-          </div>
-        </div>
-        <div className='pt-8'>
-          <div className='mt-8 flow-root'>
-            <div className='-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8'>
-              <div className='inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8'>
-                <table className='min-w-full divide-y divide-gray-300'>
-                  <thead>
-                    <tr>
-                      <th
-                        scope='col'
-                        className=' w-1/5 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0'
-                      >
-                        id
-                      </th>
-                      <th
-                        scope='col'
-                        className='px-3 py-3.5 text-left text-sm font-semibold text-gray-900'
-                      >
-                        Name
-                      </th>
-                      <th
-                        scope='col'
-                        className='px-3 py-3.5 text-left text-sm font-semibold text-gray-900'
-                      >
-                        Email
-                      </th>
-                      <th
-                        scope='col'
-                        className='px-3 py-3.5 text-left text-sm font-semibold text-gray-900'
-                      >
-                        Role
-                      </th>
-                      <th
-                        scope='col'
-                        className='px-3 py-3.5 text-left text-sm font-semibold text-gray-900'
-                      >
-                        Admin
-                      </th>
-                      <th
-                        scope='col'
-                        className='relative py-3.5 pl-3 pr-4 sm:pr-0'
-                      >
-                        <span className='sr-only'>Edit</span>
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className='divide-y divide-gray-200'>
-                    {users.map(user => (
-                      <>
-                        <tr
-                          key={user.email}
-                          onClick={() => toggleRowExpansion(user._id)}
-                        >
-                          <td className='w-1/5 whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0'>
-                            {user._id}
-                          </td>
-                          <td className='whitespace-nowrap px-3 py-4 text-sm text-gray-500'>
-                            {user.name}
-                          </td>
-                          <td className='whitespace-nowrap px-3 py-4 text-sm text-gray-500'>
-                            {user.email}
-                          </td>
-                          <td className='whitespace-nowrap px-3 py-4 text-sm text-gray-500'>
-                            {user.role}
-                          </td>
-                          <td className='whitespace-nowrap px-3 py-4 text-sm text-gray-500'>
-                            {user.admin ? 'Yes' : 'No'}
-                          </td>
-                          <td className='relative whitespace-nowrap py-4 pl-3 pr-2 text-right  text-sm font-medium sm:pr-0'>
-                            <a
-                              href='#'
-                              className=' text-indigo-600 hover:text-indigo-900'
-                            >
-                              <span className='sr-only'>, {user.name}</span>
-                              <Cog6ToothIcon className=' w-5 ' />
-                            </a>
-                          </td>
-                          <td className='relative whitespace-nowrap py-4 pl-3 pr-2 text-right  text-sm font-medium sm:pr-0'>
-                            <ChevronDownIcon className='w-5' />
-                          </td>
-                        </tr>
-                        {expandedRow === user._id && (
-                          <tr>
-                            <td colSpan='6'>
-                              {/* Add your expandable content here */}
-                              <div>
-                                Additional actions or information for{' '}
-                                {user.name}
-                              </div>
-                              {/* Example: CTA for admins */}
-                              {user.admin && (
-                                <button className='text-indigo-600 hover:text-indigo-900'>
-                                  Admin Action
-                                </button>
-                              )}
-                            </td>
-                          </tr>
-                        )}
-                      </>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-          <div className='flex justify-center space-x-4 font-semibold'>
-            <button
-              className='cursor-pointer text-gray-400 transition-all duration-200 ease-in-out hover:text-blue-800'
-              onClick={() => setPage(Math.max(page - 1, 1))}
-              disabled={page === 1}
-            >
-              Previous{' '}
-            </button>
-            <span>
-              Page {page} of {totalPages}
-            </span>
-            <button
-              className='cursor-pointer text-gray-400 transition-all duration-200 ease-in-out hover:text-blue-800'
-              onClick={() => setPage(Math.min(page + 1, totalPages))}
-              disabled={page === totalPages || userCount === 0}
-            >
-              Next
-            </button>
-          </div>
-        </div>
+    <div className='flex flex-col justify-center px-20 py-10'>
+      {/* Table Header */}
+      <div className='mb-5'>
+        <h1 className='text-3xl font-bold'>Users</h1>
+        <p className='text-md text-gray-600'>{userCount} users found</p>
       </div>
-    </>
+
+      {/* User Table */}
+      <div className='relative overflow-x-auto shadow-md sm:rounded-lg'>
+        <table className='w-full text-left text-sm text-gray-500'>
+          <thead className='bg-gray-50 text-xs uppercase text-gray-700'>
+            <tr>
+              <th scope='col' className='px-6 py-3'>
+                ID
+              </th>
+              <th scope='col' className='px-6 py-3'>
+                Name
+              </th>
+              <th scope='col' className='px-6 py-3'>
+                Email
+              </th>
+              <th scope='col' className='px-6 py-3'>
+                Role
+              </th>
+              <th scope='col' className='px-6 py-3'>
+                Admin
+              </th>
+              <th scope='col' className='px-6 py-3'>
+                Actions
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {users.map(user => (
+              <React.Fragment key={user._id}>
+                <tr
+                  className='cursor-pointer border-b bg-white hover:bg-gray-50'
+                  onClick={() => toggleRowExpansion(user._id)}
+                >
+                  <td className='px-6 py-4'>{user._id}</td>
+                  <td className='px-6 py-4'>{user.name}</td>
+                  <td className='px-6 py-4'>{user.email}</td>
+                  <td className='px-6 py-4'>{user.role}</td>
+                  <td className='px-6 py-4'>{user.admin ? 'Yes' : 'No'}</td>
+                  <td className='px-6 py-4 text-right'>Edit</td>
+                </tr>
+                {expandedRow === user._id && (
+                  <tr className='bg-gray-100'>
+                    <td colSpan='6' className='px-6 py-4'>
+                      <div className='flex flex-col gap-2'>
+                        <span>Additional details for {user.name}</span>
+                        <div>
+                          <button
+                            className='text-blue-600 hover:text-blue-900'
+                            onClick={() =>
+                              handleChangeRole(user._id, 'newRole')
+                            }
+                          >
+                            Change Role
+                          </button>
+                          <button
+                            className='ml-4 text-blue-600 hover:text-blue-900'
+                            onClick={() => handleToggleAdmin(user._id)}
+                          >
+                            {user.admin ? 'Remove Admin' : 'Make Admin'}
+                          </button>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                )}
+              </React.Fragment>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Pagination */}
+      <div className='mt-4 flex items-center justify-between'>
+        <button
+          className={`text-gray-500 hover:text-gray-700 ${
+            page === 1 && 'cursor-not-allowed'
+          }`}
+          onClick={() => setPage(Math.max(page - 1, 1))}
+          disabled={page === 1}
+        >
+          Previous
+        </button>
+        <span>
+          Page {page} of {totalPages}
+        </span>
+        <button
+          className={`text-gray-500 hover:text-gray-700 ${
+            page === totalPages && 'cursor-not-allowed'
+          }`}
+          onClick={() => setPage(Math.min(page + 1, totalPages))}
+          disabled={page === totalPages}
+        >
+          Next
+        </button>
+      </div>
+    </div>
   )
 }
