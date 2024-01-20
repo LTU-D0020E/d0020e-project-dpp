@@ -21,6 +21,13 @@ export default function Home() {
     setActivePage(pageNumber)
   }
 
+  const openModal = productId => {
+    const modal = document.getElementById(`modal-${productId}`)
+    if (modal) {
+      modal.style.display = 'block'
+    }
+  }
+
   return (
     <LayoutGlobal>
       <Container>
@@ -69,7 +76,7 @@ export default function Home() {
               <div>
                 <div class='px-4 sm:px-0'>
                   <h3 class='text-base text-xl font-semibold leading-7 text-teal-600'>
-                    Aron Gunnar
+                    Account
                   </h3>
                   <p class='mt-1 max-w-2xl text-sm leading-6 text-gray-500'>
                     Personal details
@@ -130,7 +137,7 @@ export default function Home() {
                 <div>
                   <div class='px-4 sm:px-0'>
                     <h3 class='text-base text-xl font-semibold leading-7 text-teal-600'>
-                      Aron Gunnar
+                      Security
                     </h3>
                     <p class='mt-1 max-w-2xl text-sm leading-6 text-gray-500'>
                       Edit information
@@ -201,7 +208,15 @@ export default function Home() {
             )}
             {activePage === 3 && (
               <div className=''>
-                <table>
+                <div class='px-4 sm:px-0'>
+                  <h3 class='text-base text-xl font-semibold leading-7 text-teal-600'>
+                    Scanned products
+                  </h3>
+                  <p class='mt-1 max-w-2xl text-sm leading-6 text-gray-500'>
+                    View or create event
+                  </p>
+                </div>
+                <table className='my-8'>
                   <tr className='text-gray-700'>
                     <th className=''>Product</th>
                     <th>Product ID</th>
@@ -213,7 +228,10 @@ export default function Home() {
                     <td>QWERTY123</td>
                     <td>21/01/2024</td>
                     <td>
-                      <button className='font-bold text-teal-600 px-2 py-1 rounded-xl hover:bg-teal-600 hover:text-zinc-100 transition duration-300 ease-in-out cursor-pointer'>
+                      <button
+                        id='scanned-prod-1'
+                        className='font-bold text-teal-600 px-2 py-1 rounded-xl hover:bg-teal-600 hover:text-zinc-100 transition duration-300 ease-in-out cursor-pointer'
+                      >
                         Create event
                       </button>
                     </td>
@@ -269,77 +287,58 @@ export default function Home() {
                     </td>
                   </tr>
                 </table>
+
+                <div id='modal1' className='hidden'>
+                  <p>This is the modal for Product 1.</p>
+                </div>
               </div>
             )}
             {activePage === 4 && (
               <div className=''>
+                <div class='px-4 sm:px-0'>
+                  <h3 class='text-base text-xl font-semibold leading-7 text-teal-600'>
+                    Events
+                  </h3>
+                  <p class='mt-1 max-w-2xl text-sm leading-6 text-gray-500'>
+                    Inspect event status
+                  </p>
+                </div>
                 <div className=''>
-                  <table>
+                  <table className='my-8'>
                     <tr className='text-gray-700'>
                       <th className=''>Product</th>
                       <th>Product ID</th>
                       <th>Date Scanned</th>
-                      <th></th>
                     </tr>
                     <tr className='text-gray-700'>
                       <td>Battery</td>
                       <td>QWERTY123</td>
                       <td>21/01/2024</td>
-                      <td>
-                        <button className='font-bold text-teal-600 px-2 py-1 rounded-xl hover:bg-teal-600 hover:text-zinc-100 transition duration-300 ease-in-out cursor-pointer'>
-                          Create event
-                        </button>
-                      </td>
                     </tr>
                     <tr className='text-gray-700'>
                       <td>Battery</td>
                       <td>QWERTY123</td>
                       <td>21/01/2024</td>
-                      <td>
-                        <button className='font-bold text-teal-600 px-2 py-1 rounded-xl hover:bg-teal-600 hover:text-zinc-100 transition duration-300 ease-in-out cursor-pointer'>
-                          Create event
-                        </button>
-                      </td>
                     </tr>
                     <tr className='text-gray-700'>
                       <td>Battery</td>
                       <td>QWERTY123</td>
                       <td>21/01/2024</td>
-                      <td>
-                        <button className='font-bold text-teal-600 px-2 py-1 rounded-xl hover:bg-teal-600 hover:text-zinc-100 transition duration-300 ease-in-out cursor-pointer'>
-                          Create event
-                        </button>
-                      </td>
                     </tr>
                     <tr className='text-gray-700'>
                       <td>Battery</td>
                       <td>QWERTY123</td>
                       <td>21/01/2024</td>
-                      <td>
-                        <button className='font-bold text-teal-600 px-2 py-1 rounded-xl hover:bg-teal-600 hover:text-zinc-100 transition duration-300 ease-in-out cursor-pointer'>
-                          Create event
-                        </button>
-                      </td>
                     </tr>
                     <tr className='text-gray-700'>
                       <td>Battery</td>
                       <td>QWERTY123</td>
                       <td>21/01/2024</td>
-                      <td>
-                        <button className='font-bold text-teal-600 px-2 py-1 rounded-xl hover:bg-teal-600 hover:text-zinc-100 transition duration-300 ease-in-out cursor-pointer'>
-                          Create event
-                        </button>
-                      </td>
                     </tr>
                     <tr className='text-gray-700'>
                       <td>Battery</td>
                       <td>QWERTY123</td>
                       <td>21/01/2024</td>
-                      <td>
-                        <button className='font-bold text-teal-600 px-2 py-1 rounded-xl hover:bg-teal-600 hover:text-zinc-100 transition duration-300 ease-in-out cursor-pointer'>
-                          Create event
-                        </button>
-                      </td>
                     </tr>
                   </table>
                 </div>
