@@ -38,7 +38,7 @@ export default function Home() {
               onClick={() => handleButtonClick(2)}
             >
               <ExclamationTriangleIcon className='h-5 mt-[2px] mr-2' />
-              Placeholder
+              Security
             </button>
             <button
               className={`flex flex-row text-left w-[90%] p-2 my-1 rounded-md font-bold text-zinc-600 transition duration-200 ${
@@ -47,13 +47,22 @@ export default function Home() {
               onClick={() => handleButtonClick(3)}
             >
               <ExclamationTriangleIcon className='h-5 mt-[2px] mr-2' />
-              Placeholder
+              Scanned products
             </button>
             <button
               className={`flex flex-row text-left w-[90%] p-2 my-1 rounded-md font-bold text-zinc-600 transition duration-200 ${
                 activePage === 4 ? 'active' : ''
               }`}
               onClick={() => handleButtonClick(4)}
+            >
+              <ExclamationTriangleIcon className='h-5 mt-[2px] mr-2' />
+              Events
+            </button>
+            <button
+              className={`flex flex-row text-left w-[90%] p-2 my-1 rounded-md font-bold text-zinc-600 transition duration-200 ${
+                activePage === 5 ? 'active' : ''
+              }`}
+              onClick={() => handleButtonClick(5)}
             >
               <ExclamationTriangleIcon className='h-5 mt-[2px] mr-2' />
               Placeholder
@@ -63,49 +72,116 @@ export default function Home() {
           <div className='h-[30vw] w-full mx-20'>
             {activePage === 1 && (
               <div>
-                <div className='flex justify-between'>
-                  <h2 className='font-bold text-xl mb-5'>
-                    Account information
-                  </h2>
-                  <button className='font-bold text-zinc-700 text-md mb-5 bg-zinc-200 rounded-3xl w-[110px] p-1 transition duration-200 hover:bg-teal-600 hover:text-zinc-50'>
-                    Edit profile
-                  </button>
+                <div class='px-4 sm:px-0'>
+                  <h3 class='text-base text-2xl font-semibold leading-7 text-teal-600'>
+                    Aron Gunnar
+                  </h3>
+                  <p class='mt-1 max-w-2xl text-sm leading-6 text-gray-500'>
+                    Personal details
+                  </p>
                 </div>
-
-                <table>
-                  <tr>
-                    <td className='font-bold w-[15vw] leading-loose'>
-                      User Id
-                    </td>
-                    <td>Aron Gunnar</td>
-                  </tr>
-                  <tr>
-                    <td className='font-bold w-[15vw] leading-loose'>Name</td>
-                    <td>Oscar Borén</td>
-                  </tr>
-                  <tr>
-                    <td className='font-bold w-[15vw] leading-loose'>Email</td>
-                    <td>example-0@student.ltu.se</td>
-                  </tr>
-                  <tr>
-                    <td className='font-bold w-[15vw] leading-loose'>Phone</td>
-                    <td>+46234567890</td>
-                  </tr>
-                  <tr>
-                    <td className='font-bold w-[15vw] leading-loose'>Role</td>
-                    <td>Admin</td>
-                  </tr>
-                </table>
+                <div class='mt-6 border-t border-gray-100'>
+                  <dl class='divide-y divide-gray-100'>
+                    <div class='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
+                      <dt class='text-sm font-medium leading-6 text-gray-900'>
+                        Full name
+                      </dt>
+                      <dd class='mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0'>
+                        Aron Gunnar
+                      </dd>
+                    </div>
+                    <div class='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
+                      <dt class='text-sm font-medium leading-6 text-gray-900'>
+                        Role
+                      </dt>
+                      <dd class='mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0'>
+                        Admin
+                      </dd>
+                    </div>
+                    <div class='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
+                      <dt class='text-sm font-medium leading-6 text-gray-900'>
+                        Email address
+                      </dt>
+                      <dd class='mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0'>
+                        arogun-9@student.ltu.se
+                      </dd>
+                    </div>
+                    <div class='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
+                      <dt class='text-sm font-medium leading-6 text-gray-900'>
+                        Company / Institution
+                      </dt>
+                      <dd class='mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0'>
+                        Luleå Tekniska Universitet
+                      </dd>
+                    </div>
+                    <div class='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
+                      <dt class='text-sm font-medium leading-6 text-gray-900'>
+                        About
+                      </dt>
+                      <dd class='mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0'>
+                        Fugiat ipsum ipsum deserunt culpa aute sint do nostrud
+                        anim incididunt cillum culpa consequat. Excepteur qui
+                        ipsum aliquip consequat sint. Sit id mollit nulla mollit
+                        nostrud in ea officia proident. Irure nostrud pariatur
+                        mollit ad adipisicing reprehenderit deserunt qui eu.
+                      </dd>
+                    </div>
+                  </dl>
+                </div>
               </div>
             )}
             {activePage === 2 && (
-              <div className=''>Lorem ipsum dolor sit amet 2</div>
+              <div className=''>
+                <div>
+                  <div class='px-4 sm:px-0'>
+                    <h3 class='text-base text-2xl font-semibold leading-7 text-teal-600'>
+                      Aron Gunnar
+                    </h3>
+                    <p class='mt-1 max-w-2xl text-sm leading-6 text-gray-500'>
+                      Personal details
+                    </p>
+                  </div>
+                  <div class='mt-6 border-t border-gray-100'>
+                    <dl class='divide-y divide-gray-100'>
+                      <div class='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
+                        <dt class='text-sm font-medium leading-6 text-gray-900'>
+                          Email address
+                        </dt>
+                        <dd class='mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0'>
+                          arogun-9@student.ltu.se
+                        </dd>
+                      </div>
+                      <div class='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
+                        <dt class='text-sm font-medium leading-6 text-gray-900'>
+                          Password
+                        </dt>
+                        <dd class='mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0'>
+                          *********
+                        </dd>
+                      </div>
+                      <div class='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
+                        <dt class='text-sm font-medium leading-6 text-gray-900'>
+                          Email address
+                        </dt>
+                        <dd class='mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0'>
+                          arogun-9@student.ltu.se
+                        </dd>
+                      </div>
+                    </dl>
+                  </div>
+                </div>
+              </div>
             )}
             {activePage === 3 && (
-              <div className=''>Lorem ipsum dolor sit amet 3</div>
+              <div className=''>
+                <div></div>
+              </div>
             )}
             {activePage === 4 && (
               <div className=''>Lorem ipsum dolor sit amet 4</div>
+            )}
+            {activePage === 5 && (
+              <div className=''>Lorem ipsum dolor sit amet 5</div>
             )}
           </div>
         </div>
