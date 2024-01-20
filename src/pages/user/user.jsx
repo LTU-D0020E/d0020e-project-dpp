@@ -5,6 +5,10 @@ import LayoutGlobal from '@/components/Layout/LayoutGlobal'
 import { Container } from '@/components/utils/Container'
 import { UserIcon } from '@heroicons/react/24/outline'
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
+import { PencilIcon } from '@heroicons/react/24/outline'
+import { Cog6ToothIcon } from '@heroicons/react/24/outline'
+import { ClipboardDocumentListIcon } from '@heroicons/react/24/outline'
+import { QrCodeIcon } from '@heroicons/react/24/outline'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -37,7 +41,7 @@ export default function Home() {
               }`}
               onClick={() => handleButtonClick(2)}
             >
-              <ExclamationTriangleIcon className='h-5 mt-[2px] mr-2' />
+              <Cog6ToothIcon className='h-5 mt-[2px] mr-2' />
               Security
             </button>
             <button
@@ -46,7 +50,7 @@ export default function Home() {
               }`}
               onClick={() => handleButtonClick(3)}
             >
-              <ExclamationTriangleIcon className='h-5 mt-[2px] mr-2' />
+              <QrCodeIcon className='h-5 mt-[2px] mr-2' />
               Scanned products
             </button>
             <button
@@ -55,17 +59,8 @@ export default function Home() {
               }`}
               onClick={() => handleButtonClick(4)}
             >
-              <ExclamationTriangleIcon className='h-5 mt-[2px] mr-2' />
+              <ClipboardDocumentListIcon className='h-5 mt-[2px] mr-2' />
               Events
-            </button>
-            <button
-              className={`flex flex-row text-left w-[90%] p-2 my-1 rounded-md font-bold text-zinc-600 transition duration-200 ${
-                activePage === 5 ? 'active' : ''
-              }`}
-              onClick={() => handleButtonClick(5)}
-            >
-              <ExclamationTriangleIcon className='h-5 mt-[2px] mr-2' />
-              Placeholder
             </button>
           </div>
           <div className='h-full border border-r-1 border-zinc-200'></div>
@@ -73,7 +68,7 @@ export default function Home() {
             {activePage === 1 && (
               <div>
                 <div class='px-4 sm:px-0'>
-                  <h3 class='text-base text-2xl font-semibold leading-7 text-teal-600'>
+                  <h3 class='text-base text-xl font-semibold leading-7 text-teal-600'>
                     Aron Gunnar
                   </h3>
                   <p class='mt-1 max-w-2xl text-sm leading-6 text-gray-500'>
@@ -103,7 +98,7 @@ export default function Home() {
                         Email address
                       </dt>
                       <dd class='mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0'>
-                        arogun-9@student.ltu.se
+                        a*******@student.ltu.se
                       </dd>
                     </div>
                     <div class='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
@@ -133,30 +128,70 @@ export default function Home() {
             {activePage === 2 && (
               <div className=''>
                 <div>
+                  <div class='px-4 sm:px-0'>
+                    <h3 class='text-base text-xl font-semibold leading-7 text-teal-600'>
+                      Aron Gunnar
+                    </h3>
+                    <p class='mt-1 max-w-2xl text-sm leading-6 text-gray-500'>
+                      Edit information
+                    </p>
+                  </div>
                   <div class='mt-6 border-t border-gray-100'>
                     <dl class='divide-y divide-gray-100'>
                       <div class='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
                         <dt class='text-sm font-medium leading-6 text-gray-900'>
+                          Full name
+                        </dt>
+                        <dd class='mt-1 text-sm leading-6 text-gray-700 sm:col-span-1 sm:mt-0'>
+                          Aron Gunnar
+                        </dd>
+                        <dd class='mt-1 text-sm leading-6 text-gray-700 sm:col-span-1 sm:mt-0'>
+                          <button className='px-3 py-1 bg-zinc-200 rounded-xl flex flex-row hover:bg-teal-600 hover:text-zinc-100 transition duration-300 ease-in-out cursor-pointer'>
+                            <PencilIcon className='h-4 mt-[4px] mr-2' />
+                            <p className='font-bold'>Edit</p>
+                          </button>
+                        </dd>
+                      </div>
+                      <div class='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
+                        <dt class='text-sm font-medium leading-6 text-gray-900'>
                           Email address
                         </dt>
-                        <dd class='mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0'>
+                        <dd class='mt-1 text-sm leading-6 text-gray-700 sm:col-span-1 sm:mt-0'>
                           arogun-9@student.ltu.se
+                        </dd>
+                        <dd class='mt-1 text-sm leading-6 text-gray-700 sm:col-span-1 sm:mt-0'>
+                          <button className='px-3 py-1 bg-zinc-200 rounded-xl flex flex-row hover:bg-teal-600 hover:text-zinc-100 transition duration-300 ease-in-out cursor-pointer'>
+                            <PencilIcon className='h-4 mt-[4px] mr-2' />
+                            <p className='font-bold'>Edit</p>
+                          </button>
                         </dd>
                       </div>
                       <div class='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
                         <dt class='text-sm font-medium leading-6 text-gray-900'>
                           Password
                         </dt>
-                        <dd class='mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0'>
+                        <dd class='mt-1 text-sm leading-6 text-gray-700 sm:col-span-1 sm:mt-0'>
                           *********
+                        </dd>
+                        <dd class='mt-1 text-sm leading-6 text-gray-700 sm:col-span-1 sm:mt-0'>
+                          <button className='px-3 py-1 bg-zinc-200 rounded-xl flex flex-row hover:bg-teal-600 hover:text-zinc-100 transition duration-300 ease-in-out cursor-pointer'>
+                            <PencilIcon className='h-4 mt-[4px] mr-2' />
+                            <p className='font-bold'>Edit</p>
+                          </button>
                         </dd>
                       </div>
                       <div class='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
                         <dt class='text-sm font-medium leading-6 text-gray-900'>
-                          Email address
+                          Conpany / Institution
                         </dt>
-                        <dd class='mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0'>
-                          arogun-9@student.ltu.se
+                        <dd class='mt-1 text-sm leading-6 text-gray-700 sm:col-span-1 sm:mt-0'>
+                          Luleå Tekniska Universitet
+                        </dd>
+                        <dd class='mt-1 text-sm leading-6 text-gray-700 sm:col-span-1 sm:mt-0'>
+                          <button className='px-3 py-1 bg-zinc-200 rounded-xl flex flex-row hover:bg-teal-600 hover:text-zinc-100 transition duration-300 ease-in-out cursor-pointer'>
+                            <PencilIcon className='h-4 mt-[4px] mr-2' />
+                            <p className='font-bold'>Edit</p>
+                          </button>
                         </dd>
                       </div>
                     </dl>
@@ -167,27 +202,148 @@ export default function Home() {
             {activePage === 3 && (
               <div className=''>
                 <table>
-                  <tr className=''>
-                    <th>Product</th>
+                  <tr className='text-gray-700'>
+                    <th className=''>Product</th>
                     <th>Product ID</th>
                     <th>Date Scanned</th>
+                    <th></th>
                   </tr>
-                  <tr>
+                  <tr className='text-gray-700'>
                     <td>Battery</td>
                     <td>QWERTY123</td>
                     <td>21/01/2024</td>
                     <td>
-                      <button>Create event</button>
+                      <button className='font-bold text-teal-600 px-2 py-1 rounded-xl hover:bg-teal-600 hover:text-zinc-100 transition duration-300 ease-in-out cursor-pointer'>
+                        Create event
+                      </button>
+                    </td>
+                  </tr>
+                  <tr className='text-gray-700'>
+                    <td>Battery</td>
+                    <td>QWERTY123</td>
+                    <td>21/01/2024</td>
+                    <td>
+                      <button className='font-bold text-teal-600 px-2 py-1 rounded-xl hover:bg-teal-600 hover:text-zinc-100 transition duration-300 ease-in-out cursor-pointer'>
+                        Create event
+                      </button>
+                    </td>
+                  </tr>
+                  <tr className='text-gray-700'>
+                    <td>Battery</td>
+                    <td>QWERTY123</td>
+                    <td>21/01/2024</td>
+                    <td>
+                      <button className='font-bold text-teal-600 px-2 py-1 rounded-xl hover:bg-teal-600 hover:text-zinc-100 transition duration-300 ease-in-out cursor-pointer'>
+                        Create event
+                      </button>
+                    </td>
+                  </tr>
+                  <tr className='text-gray-700'>
+                    <td>Battery</td>
+                    <td>QWERTY123</td>
+                    <td>21/01/2024</td>
+                    <td>
+                      <button className='font-bold text-teal-600 px-2 py-1 rounded-xl hover:bg-teal-600 hover:text-zinc-100 transition duration-300 ease-in-out cursor-pointer'>
+                        Create event
+                      </button>
+                    </td>
+                  </tr>
+                  <tr className='text-gray-700'>
+                    <td>Battery</td>
+                    <td>QWERTY123</td>
+                    <td>21/01/2024</td>
+                    <td>
+                      <button className='font-bold text-teal-600 px-2 py-1 rounded-xl hover:bg-teal-600 hover:text-zinc-100 transition duration-300 ease-in-out cursor-pointer'>
+                        Create event
+                      </button>
+                    </td>
+                  </tr>
+                  <tr className='text-gray-700'>
+                    <td>Battery</td>
+                    <td>QWERTY123</td>
+                    <td>21/01/2024</td>
+                    <td>
+                      <button className='font-bold text-teal-600 px-2 py-1 rounded-xl hover:bg-teal-600 hover:text-zinc-100 transition duration-300 ease-in-out cursor-pointer'>
+                        Create event
+                      </button>
                     </td>
                   </tr>
                 </table>
               </div>
             )}
             {activePage === 4 && (
-              <div className=''>Lorem ipsum dolor sit amet 4</div>
-            )}
-            {activePage === 5 && (
-              <div className=''>Lorem ipsum dolor sit amet 5</div>
+              <div className=''>
+                <div className=''>
+                  <table>
+                    <tr className='text-gray-700'>
+                      <th className=''>Product</th>
+                      <th>Product ID</th>
+                      <th>Date Scanned</th>
+                      <th></th>
+                    </tr>
+                    <tr className='text-gray-700'>
+                      <td>Battery</td>
+                      <td>QWERTY123</td>
+                      <td>21/01/2024</td>
+                      <td>
+                        <button className='font-bold text-teal-600 px-2 py-1 rounded-xl hover:bg-teal-600 hover:text-zinc-100 transition duration-300 ease-in-out cursor-pointer'>
+                          Create event
+                        </button>
+                      </td>
+                    </tr>
+                    <tr className='text-gray-700'>
+                      <td>Battery</td>
+                      <td>QWERTY123</td>
+                      <td>21/01/2024</td>
+                      <td>
+                        <button className='font-bold text-teal-600 px-2 py-1 rounded-xl hover:bg-teal-600 hover:text-zinc-100 transition duration-300 ease-in-out cursor-pointer'>
+                          Create event
+                        </button>
+                      </td>
+                    </tr>
+                    <tr className='text-gray-700'>
+                      <td>Battery</td>
+                      <td>QWERTY123</td>
+                      <td>21/01/2024</td>
+                      <td>
+                        <button className='font-bold text-teal-600 px-2 py-1 rounded-xl hover:bg-teal-600 hover:text-zinc-100 transition duration-300 ease-in-out cursor-pointer'>
+                          Create event
+                        </button>
+                      </td>
+                    </tr>
+                    <tr className='text-gray-700'>
+                      <td>Battery</td>
+                      <td>QWERTY123</td>
+                      <td>21/01/2024</td>
+                      <td>
+                        <button className='font-bold text-teal-600 px-2 py-1 rounded-xl hover:bg-teal-600 hover:text-zinc-100 transition duration-300 ease-in-out cursor-pointer'>
+                          Create event
+                        </button>
+                      </td>
+                    </tr>
+                    <tr className='text-gray-700'>
+                      <td>Battery</td>
+                      <td>QWERTY123</td>
+                      <td>21/01/2024</td>
+                      <td>
+                        <button className='font-bold text-teal-600 px-2 py-1 rounded-xl hover:bg-teal-600 hover:text-zinc-100 transition duration-300 ease-in-out cursor-pointer'>
+                          Create event
+                        </button>
+                      </td>
+                    </tr>
+                    <tr className='text-gray-700'>
+                      <td>Battery</td>
+                      <td>QWERTY123</td>
+                      <td>21/01/2024</td>
+                      <td>
+                        <button className='font-bold text-teal-600 px-2 py-1 rounded-xl hover:bg-teal-600 hover:text-zinc-100 transition duration-300 ease-in-out cursor-pointer'>
+                          Create event
+                        </button>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
             )}
           </div>
         </div>
