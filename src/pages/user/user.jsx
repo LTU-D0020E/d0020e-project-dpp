@@ -133,14 +133,6 @@ export default function Home() {
             {activePage === 2 && (
               <div className=''>
                 <div>
-                  <div class='px-4 sm:px-0'>
-                    <h3 class='text-base text-2xl font-semibold leading-7 text-teal-600'>
-                      Aron Gunnar
-                    </h3>
-                    <p class='mt-1 max-w-2xl text-sm leading-6 text-gray-500'>
-                      Personal details
-                    </p>
-                  </div>
                   <div class='mt-6 border-t border-gray-100'>
                     <dl class='divide-y divide-gray-100'>
                       <div class='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
@@ -174,7 +166,21 @@ export default function Home() {
             )}
             {activePage === 3 && (
               <div className=''>
-                <div></div>
+                <table>
+                  <tr className=''>
+                    <th>Product</th>
+                    <th>Product ID</th>
+                    <th>Date Scanned</th>
+                  </tr>
+                  <tr>
+                    <td>Battery</td>
+                    <td>QWERTY123</td>
+                    <td>21/01/2024</td>
+                    <td>
+                      <button>Create event</button>
+                    </td>
+                  </tr>
+                </table>
               </div>
             )}
             {activePage === 4 && (
