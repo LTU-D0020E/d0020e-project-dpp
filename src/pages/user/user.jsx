@@ -159,60 +159,100 @@ export default function Home() {
                   <div class='mt-6 border-t border-gray-100'>
                     <dl class='divide-y divide-gray-100'>
                       <div class='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
-                        <dt class='text-sm font-medium leading-6 text-gray-900'>
+                        <dt class='mt-[2px] text-sm font-medium leading-6 text-gray-900 sm:col-span-1 sm:mt-0'>
                           Full name
                         </dt>
-                        <dd class='mt-1 text-sm leading-6 text-gray-700 sm:col-span-1 sm:mt-0'>
-                          Aron Gunnar
-                        </dd>
-                        <dd class='mt-1 text-sm leading-6 text-gray-700 sm:col-span-1 sm:mt-0'>
-                          <button className='px-3 py-1 bg-zinc-200 rounded-xl flex flex-row hover:bg-teal-600 hover:text-zinc-100 transition duration-300 ease-in-out cursor-pointer'>
-                            <PencilIcon className='h-4 mt-[4px] mr-2' />
-                            <p className='font-bold'>Edit</p>
-                          </button>
-                        </dd>
+                        <form className='flex flex-row justify-between sm:col-span-1 sm:mt-0'>
+                          <div class='text-sm leading-6 text-gray-700'>
+                            <input
+                              className='w-[200px] p-1 rounded-lg'
+                              type='text'
+                              id='name'
+                              value='Aron Gunnar'
+                            />
+                          </div>
+                          <div class='mx-[110px] text-sm leading-6 text-gray-700'>
+                            <button
+                              type='submit'
+                              class='px-3 py-1 bg-zinc-200 rounded-xl flex flex-row hover:bg-teal-600 hover:text-zinc-100 transition duration-300 ease-in-out cursor-pointer'
+                            >
+                              <PencilIcon class='h-4 mt-[4px] mr-2' />
+                              <p class='font-bold'>Edit</p>
+                            </button>
+                          </div>
+                        </form>
                       </div>
                       <div class='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
-                        <dt class='text-sm font-medium leading-6 text-gray-900'>
+                        <dt class='mt-[2px] text-sm font-medium leading-6 text-gray-900'>
                           Email address
                         </dt>
-                        <dd class='mt-1 text-sm leading-6 text-gray-700 sm:col-span-1 sm:mt-0'>
-                          arogun-9@student.ltu.se
-                        </dd>
-                        <dd class='mt-1 text-sm leading-6 text-gray-700 sm:col-span-1 sm:mt-0'>
-                          <button className='px-3 py-1 bg-zinc-200 rounded-xl flex flex-row hover:bg-teal-600 hover:text-zinc-100 transition duration-300 ease-in-out cursor-pointer'>
-                            <PencilIcon className='h-4 mt-[4px] mr-2' />
-                            <p className='font-bold'>Edit</p>
-                          </button>
-                        </dd>
+                        <form className='flex flex-row justify-between sm:col-span-1 sm:mt-0'>
+                          <div class='text-sm leading-6 text-gray-700'>
+                            <input
+                              className='w-[200px] p-1 rounded-lg'
+                              type='text'
+                              id='name'
+                              value='argun-9@student.ltu.se'
+                            />
+                          </div>
+                          <div class='mx-[110px] text-sm leading-6 text-gray-700'>
+                            <button
+                              type='submit'
+                              class='px-3 py-1 bg-zinc-200 rounded-xl flex flex-row hover:bg-teal-600 hover:text-zinc-100 transition duration-300 ease-in-out cursor-pointer'
+                            >
+                              <PencilIcon class='h-4 mt-[4px] mr-2' />
+                              <p class='font-bold'>Edit</p>
+                            </button>
+                          </div>
+                        </form>
                       </div>
                       <div class='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
                         <dt class='text-sm font-medium leading-6 text-gray-900'>
                           Password
                         </dt>
-                        <dd class='mt-1 text-sm leading-6 text-gray-700 sm:col-span-1 sm:mt-0'>
-                          *********
-                        </dd>
-                        <dd class='mt-1 text-sm leading-6 text-gray-700 sm:col-span-1 sm:mt-0'>
-                          <button className='px-3 py-1 bg-zinc-200 rounded-xl flex flex-row hover:bg-teal-600 hover:text-zinc-100 transition duration-300 ease-in-out cursor-pointer'>
-                            <PencilIcon className='h-4 mt-[4px] mr-2' />
-                            <p className='font-bold'>Edit</p>
-                          </button>
-                        </dd>
+                        <form className='flex flex-row justify-between sm:col-span-1 sm:mt-0'>
+                          <div class='text-sm leading-6 text-gray-700'>
+                            <input
+                              className='w-[200px] p-1 rounded-lg'
+                              type='text'
+                              id='name'
+                              value='**********'
+                            />
+                          </div>
+                          <div class='mx-[110px] text-sm leading-6 text-gray-700'>
+                            <button
+                              type='submit'
+                              class='px-3 py-1 bg-zinc-200 rounded-xl flex flex-row hover:bg-teal-600 hover:text-zinc-100 transition duration-300 ease-in-out cursor-pointer'
+                            >
+                              <PencilIcon class='h-4 mt-[4px] mr-2' />
+                              <p class='font-bold'>Edit</p>
+                            </button>
+                          </div>
+                        </form>
                       </div>
                       <div class='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
                         <dt class='text-sm font-medium leading-6 text-gray-900'>
                           Conpany / Institution
                         </dt>
-                        <dd class='mt-1 text-sm leading-6 text-gray-700 sm:col-span-1 sm:mt-0'>
-                          Luleå Tekniska Universitet
-                        </dd>
-                        <dd class='mt-1 text-sm leading-6 text-gray-700 sm:col-span-1 sm:mt-0'>
-                          <button className='px-3 py-1 bg-zinc-200 rounded-xl flex flex-row hover:bg-teal-600 hover:text-zinc-100 transition duration-300 ease-in-out cursor-pointer'>
-                            <PencilIcon className='h-4 mt-[4px] mr-2' />
-                            <p className='font-bold'>Edit</p>
-                          </button>
-                        </dd>
+                        <form className='flex flex-row justify-between sm:col-span-1 sm:mt-0'>
+                          <div class='text-sm leading-6 text-gray-700'>
+                            <input
+                              className='w-[200px] p-1 rounded-lg'
+                              type='text'
+                              id='name'
+                              value='Luleå Tekniska Universitet'
+                            />
+                          </div>
+                          <div class='mx-[110px] text-sm leading-6 text-gray-700'>
+                            <button
+                              type='submit'
+                              class='px-3 py-1 bg-zinc-200 rounded-xl flex flex-row hover:bg-teal-600 hover:text-zinc-100 transition duration-300 ease-in-out cursor-pointer'
+                            >
+                              <PencilIcon class='h-4 mt-[4px] mr-2' />
+                              <p class='font-bold'>Edit</p>
+                            </button>
+                          </div>
+                        </form>
                       </div>
                     </dl>
                   </div>
