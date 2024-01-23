@@ -573,38 +573,295 @@ export default function Home() {
                       <th>Product ID</th>
                       <th>Date Scanned</th>
                     </tr>
-                    <tr className='text-gray-700'>
+                    <tr
+                      onClick={() => openModal(7)}
+                      className='text-gray-700 cursor-pointer'
+                    >
                       <td>Battery</td>
                       <td>QWERTY123</td>
                       <td>21/01/2024</td>
                     </tr>
-                    <tr className='text-gray-700'>
+                    <tr
+                      onClick={() => openModal(8)}
+                      className='text-gray-700 cursor-pointer'
+                    >
                       <td>Battery</td>
                       <td>QWERTY123</td>
                       <td>21/01/2024</td>
                     </tr>
-                    <tr className='text-gray-700'>
+                    <tr
+                      onClick={() => openModal(9)}
+                      className='text-gray-700 cursor-pointer'
+                    >
                       <td>Battery</td>
                       <td>QWERTY123</td>
                       <td>21/01/2024</td>
                     </tr>
-                    <tr className='text-gray-700'>
+                    <tr
+                      onClick={() => openModal(10)}
+                      className='text-gray-700 cursor-pointer'
+                    >
                       <td>Battery</td>
                       <td>QWERTY123</td>
                       <td>21/01/2024</td>
                     </tr>
-                    <tr className='text-gray-700'>
+                    <tr
+                      onClick={() => openModal(11)}
+                      className='text-gray-700 cursor-pointer'
+                    >
                       <td>Battery</td>
                       <td>QWERTY123</td>
                       <td>21/01/2024</td>
                     </tr>
-                    <tr className='text-gray-700'>
+                    <tr
+                      onClick={() => openModal(12)}
+                      className='text-gray-700 cursor-pointer'
+                    >
                       <td>Battery</td>
                       <td>QWERTY123</td>
                       <td>21/01/2024</td>
                     </tr>
                   </table>
                 </div>
+                <ReactModal
+                  isOpen={activeModal === 7}
+                  onRequestClose={closeModal}
+                  contentLabel='Create event for item 6'
+                  className='h-[100%] flex justify-center items-center'
+                >
+                  <div className='bg-zinc-200 w-[30%] h-[40%] p-[20px] rounded-xl'>
+                    <div className='flex flex-row justify-between font-bold'>
+                      <p className=''>
+                        Product{' '}
+                        <span className='italic text-teal-600'>GET PROD.</span>
+                      </p>
+                      <button
+                        onClick={closeModal}
+                        className='bg-zinc-300 px-[10px] py-[2px] rounded-md hover:bg-zinc-100 transition duration-200 ease-in-out'
+                      >
+                        X
+                      </button>
+                    </div>
+                    <form
+                      onSubmit={handleSubmit}
+                      className='h-[80%] flex flex-col justify-center items-center'
+                    >
+                      <div className='w-[70%] flex justify-between m-2'>
+                        <label for='fname'>First name:</label>
+                        <input type='text' id='fname' name='fname' />
+                      </div>
+                      <div className='w-[70%] flex justify-between m-2'>
+                        <label for='lname'>Last name:</label>
+                        <input type='text' id='lname' name='lname' />
+                      </div>
+                      <input
+                        type='submit'
+                        value='Submit'
+                        className='bg-zinc-300 m-2'
+                      />
+                    </form>
+                  </div>
+                </ReactModal>
+
+                <ReactModal
+                  isOpen={activeModal === 8}
+                  onRequestClose={closeModal}
+                  contentLabel='Create event for item 6'
+                  className='h-[100%] flex justify-center items-center'
+                >
+                  <div className='bg-zinc-200 w-[30%] h-[40%] p-[20px] rounded-xl'>
+                    <div className='flex flex-row justify-between font-bold'>
+                      <p className=''>
+                        Product{' '}
+                        <span className='italic text-teal-600'>GET PROD.</span>
+                      </p>
+                      <button
+                        onClick={closeModal}
+                        className='bg-zinc-300 px-[10px] py-[2px] rounded-md hover:bg-zinc-100 transition duration-200 ease-in-out'
+                      >
+                        X
+                      </button>
+                    </div>
+                    <form
+                      onSubmit={handleSubmit}
+                      className='h-[80%] flex flex-col justify-center items-center'
+                    >
+                      <div className='w-[70%] flex justify-between m-2'>
+                        <label for='fname'>First name:</label>
+                        <input type='text' id='fname' name='fname' />
+                      </div>
+                      <div className='w-[70%] flex justify-between m-2'>
+                        <label for='lname'>Last name:</label>
+                        <input type='text' id='lname' name='lname' />
+                      </div>
+                      <input
+                        type='submit'
+                        value='Submit'
+                        className='bg-zinc-300 m-2'
+                      />
+                    </form>
+                  </div>
+                </ReactModal>
+
+                <ReactModal
+                  isOpen={activeModal === 9}
+                  onRequestClose={closeModal}
+                  contentLabel='Create event for item 6'
+                  className='h-[100%] flex justify-center items-center'
+                >
+                  <div className='bg-zinc-200 w-[30%] h-[40%] p-[20px] rounded-xl'>
+                    <div className='flex flex-row justify-between font-bold'>
+                      <p className=''>
+                        Product{' '}
+                        <span className='italic text-teal-600'>GET PROD.</span>
+                      </p>
+                      <button
+                        onClick={closeModal}
+                        className='bg-zinc-300 px-[10px] py-[2px] rounded-md hover:bg-zinc-100 transition duration-200 ease-in-out'
+                      >
+                        X
+                      </button>
+                    </div>
+                    <form
+                      onSubmit={handleSubmit}
+                      className='h-[80%] flex flex-col justify-center items-center'
+                    >
+                      <div className='w-[70%] flex justify-between m-2'>
+                        <label for='fname'>First name:</label>
+                        <input type='text' id='fname' name='fname' />
+                      </div>
+                      <div className='w-[70%] flex justify-between m-2'>
+                        <label for='lname'>Last name:</label>
+                        <input type='text' id='lname' name='lname' />
+                      </div>
+                      <input
+                        type='submit'
+                        value='Submit'
+                        className='bg-zinc-300 m-2'
+                      />
+                    </form>
+                  </div>
+                </ReactModal>
+
+                <ReactModal
+                  isOpen={activeModal === 10}
+                  onRequestClose={closeModal}
+                  contentLabel='Create event for item 6'
+                  className='h-[100%] flex justify-center items-center'
+                >
+                  <div className='bg-zinc-200 w-[30%] h-[40%] p-[20px] rounded-xl'>
+                    <div className='flex flex-row justify-between font-bold'>
+                      <p className=''>
+                        Product{' '}
+                        <span className='italic text-teal-600'>GET PROD.</span>
+                      </p>
+                      <button
+                        onClick={closeModal}
+                        className='bg-zinc-300 px-[10px] py-[2px] rounded-md hover:bg-zinc-100 transition duration-200 ease-in-out'
+                      >
+                        X
+                      </button>
+                    </div>
+                    <form
+                      onSubmit={handleSubmit}
+                      className='h-[80%] flex flex-col justify-center items-center'
+                    >
+                      <div className='w-[70%] flex justify-between m-2'>
+                        <label for='fname'>First name:</label>
+                        <input type='text' id='fname' name='fname' />
+                      </div>
+                      <div className='w-[70%] flex justify-between m-2'>
+                        <label for='lname'>Last name:</label>
+                        <input type='text' id='lname' name='lname' />
+                      </div>
+                      <input
+                        type='submit'
+                        value='Submit'
+                        className='bg-zinc-300 m-2'
+                      />
+                    </form>
+                  </div>
+                </ReactModal>
+
+                <ReactModal
+                  isOpen={activeModal === 11}
+                  onRequestClose={closeModal}
+                  contentLabel='Create event for item 6'
+                  className='h-[100%] flex justify-center items-center'
+                >
+                  <div className='bg-zinc-200 w-[30%] h-[40%] p-[20px] rounded-xl'>
+                    <div className='flex flex-row justify-between font-bold'>
+                      <p className=''>
+                        Product{' '}
+                        <span className='italic text-teal-600'>GET PROD.</span>
+                      </p>
+                      <button
+                        onClick={closeModal}
+                        className='bg-zinc-300 px-[10px] py-[2px] rounded-md hover:bg-zinc-100 transition duration-200 ease-in-out'
+                      >
+                        X
+                      </button>
+                    </div>
+                    <form
+                      onSubmit={handleSubmit}
+                      className='h-[80%] flex flex-col justify-center items-center'
+                    >
+                      <div className='w-[70%] flex justify-between m-2'>
+                        <label for='fname'>First name:</label>
+                        <input type='text' id='fname' name='fname' />
+                      </div>
+                      <div className='w-[70%] flex justify-between m-2'>
+                        <label for='lname'>Last name:</label>
+                        <input type='text' id='lname' name='lname' />
+                      </div>
+                      <input
+                        type='submit'
+                        value='Submit'
+                        className='bg-zinc-300 m-2'
+                      />
+                    </form>
+                  </div>
+                </ReactModal>
+
+                <ReactModal
+                  isOpen={activeModal === 12}
+                  onRequestClose={closeModal}
+                  contentLabel='Create event for item 6'
+                  className='h-[100%] flex justify-center items-center'
+                >
+                  <div className='bg-zinc-200 w-[30%] h-[40%] p-[20px] rounded-xl'>
+                    <div className='flex flex-row justify-between font-bold'>
+                      <p className=''>
+                        Product{' '}
+                        <span className='italic text-teal-600'>GET PROD.</span>
+                      </p>
+                      <button
+                        onClick={closeModal}
+                        className='bg-zinc-300 px-[10px] py-[2px] rounded-md hover:bg-zinc-100 transition duration-200 ease-in-out'
+                      >
+                        X
+                      </button>
+                    </div>
+                    <form
+                      onSubmit={handleSubmit}
+                      className='h-[80%] flex flex-col justify-center items-center'
+                    >
+                      <div className='w-[70%] flex justify-between m-2'>
+                        <label for='fname'>First name:</label>
+                        <input type='text' id='fname' name='fname' />
+                      </div>
+                      <div className='w-[70%] flex justify-between m-2'>
+                        <label for='lname'>Last name:</label>
+                        <input type='text' id='lname' name='lname' />
+                      </div>
+                      <input
+                        type='submit'
+                        value='Submit'
+                        className='bg-zinc-300 m-2'
+                      />
+                    </form>
+                  </div>
+                </ReactModal>
               </div>
             )}
           </div>
