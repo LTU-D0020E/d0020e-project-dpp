@@ -4,6 +4,7 @@ import {
   ArrowDownIcon,
   ChevronDownIcon,
   Cog6ToothIcon,
+  XMarkIcon,
 } from '@heroicons/react/24/solid'
 import { Dialog, Transition } from '@headlessui/react'
 import { CheckIcon } from '@heroicons/react/24/outline'
@@ -208,6 +209,10 @@ function RoleForm({ formOpen, setFormOpen }) {
                 className='relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6'
               >
                 <div className='flex flex-col space-y-4'>
+                  <XMarkIcon
+                    onClick={() => setFormOpen(false)}
+                    className='absolute right-4 top-4 w-6 cursor-pointer text-gray-300 transition-all duration-300 ease-in-out hover:text-blue-600'
+                  />
                   <div className='flex flex-col items-center justify-center'>
                     <h className='text-lg font-bold'>Role Details</h>
                     <p className='text-sm text-gray-400'>

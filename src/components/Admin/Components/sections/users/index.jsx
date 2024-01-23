@@ -3,6 +3,7 @@ import { formatDate } from '@/utils/server/helpers'
 import {
   ArrowDownIcon,
   ChevronDownIcon,
+  ChevronUpIcon,
   Cog6ToothIcon,
 } from '@heroicons/react/24/solid'
 
@@ -147,7 +148,15 @@ export default function Users() {
                   <td className='px-6 py-4'>{user.email}</td>
                   <td className='px-6 py-4'>{user.role}</td>
                   <td className='px-6 py-4'>{user.admin ? 'Yes' : 'No'}</td>
-                  <td className='px-6 py-4 text-right'>Edit</td>
+                  <td className='px-6 py-4'>
+                    <div className='flex justify-end'>
+                      {expandedRow === user._id ? (
+                        <ChevronUpIcon className='w-5' />
+                      ) : (
+                        <ChevronDownIcon className='w-5' />
+                      )}
+                    </div>
+                  </td>
                 </tr>
                 {expandedRow === user._id && (
                   <tr className='bg-gray-100'>
