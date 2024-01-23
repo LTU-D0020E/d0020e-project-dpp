@@ -2,16 +2,16 @@ import { defaultHandler } from '@/utils/server/api-helpers'
 import { ObjectId } from 'mongodb'
 import Product from '@/models/Product'
 
-const getProductByID = async (req, res) => {
+const getProductById = async (req, res) => {
   try {
-    const { productID } = req.query
+    const { productId } = req.query
 
-    if (!ObjectId.isValid(productID)) {
+    if (!ObjectId.isValid(productId)) {
       return res.status(400).json({ message: 'Invalid ID' })
     }
 
     // Use 'new' to create a new instance of ObjectId
-    const productData = await Product.findOne({ _id: new ObjectId(productID) })
+    const productData = await Product.findOne({ _id: new ObjectId(productId) })
 
     if (!productData) {
       return res.status(404).json({ message: 'Product not found' })
@@ -31,7 +31,7 @@ const handler = async (req, res) =>
     req,
     res,
     {
-      GET: getProductByID,
+      GET: getProductById,
     },
     {
       requiresAuth: false,

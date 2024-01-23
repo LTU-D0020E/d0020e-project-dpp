@@ -7,6 +7,24 @@ const eventSchema = new Schema(
     id: Number,
     dpp_class: String,
     creation_time: Date, // Assuming this should be a Date type
+    action: String,
+  },
+  { _id: false }
+)
+
+const has_event_trail = new Schema(
+  {
+    privacy: String,
+    event: [eventSchema],
+  },
+  { _id: false }
+)
+
+const componentSchema = new Schema(
+  {
+    id: Number,
+    dpp_class: String,
+    has_event_trail: [has_event_trail],
   },
   { _id: false }
 )
@@ -30,15 +48,20 @@ const productSchema = new Schema(
       id: Number,
       dpp_class: String,
       privacy: String,
+      effect: String,
     },
     main_component: {
+      privacy: String,
+      component: [componentSchema],
+    },
+    has_crm: {
       id: Number,
       dpp_class: String,
       privacy: String,
     },
     has_event_trail: {
       privacy: String,
-      events: [eventSchema], // Define a separate schema for events
+      event: [eventSchema], // Define a separate schema for events
     },
   },
   { strict: false }
