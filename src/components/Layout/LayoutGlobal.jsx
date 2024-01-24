@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import { Header } from '../Global/NavbarGlobal'
-import SearchBar from '../utils/SearchBar'
 
 export default function LayoutGlobal({
   className,
@@ -21,11 +20,7 @@ export default function LayoutGlobal({
       </Head>
       <Header />
       <main>
-        <>
-          <SearchBar></SearchBar>
-
-          {props.children}
-        </>
+        <>{props.children}</>
       </main>
     </>
   )
