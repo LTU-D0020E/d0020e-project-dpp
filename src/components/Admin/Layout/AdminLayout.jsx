@@ -72,7 +72,7 @@ export default function AdminLayout() {
     },
     {
       name: 'Roles',
-      href: '#',
+      href: '#roles',
       icon: UserGroupIcon,
       current: selectedSection === 'Roles',
       onClick: e => handleNavigationClick('Roles', e),
