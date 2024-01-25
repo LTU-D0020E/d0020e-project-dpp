@@ -102,4 +102,3 @@ export const authOptions = {
     error: '/signup',
   },
 }
-

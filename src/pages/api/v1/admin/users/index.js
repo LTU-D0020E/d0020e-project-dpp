@@ -28,7 +28,7 @@ const handler = async (req, res) =>
     },
     {
       requiresAuth: false,
-      requiresAdmin: false,
+      requiresAdmin: true,
     }
   )
 

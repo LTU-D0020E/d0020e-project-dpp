@@ -3,99 +3,8 @@ import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
-/* export default function LoginPage() {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const [isSubmitted, setIsSubmitted] = useState(false)
-
-  const handleSubmit = async event => {
-    event.preventDefault()
-
-    // Send login credentials to the server or perform necessary actions
-    console.log('Submitting login form...')
-    console.log(`Username: ${username}`)
-    console.log(`Password: ${password}`)
-
-    try {
-      const response = await fetch('/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, password }),
-      })
-
-      const data = await response.json()
-      console.log(data)
-
-      if (data.success) {
-        // Submission successful
-        setIsSubmitted(true)
-      } else {
-        // Handle submission error
-        console.error('Submission failed!')
-      }
-    } catch (error) {
-      console.error('Failed to connect to the server:', error)
-    }
-  }
-
-  return (
-    <div className='login-container flex min-h-screen items-center justify-center'>
-      <form
-        className='login-form w-full max-w-lg rounded-lg bg-white p-8 shadow-md'
-        onSubmit={handleSubmit}
-      >
-        <div className='login-input-group '>
-          <label className='login-label ' htmlFor='username'>
-            Username:
-          </label>
-          <input
-            className='login-input w-full '
-            id='username'
-            type='text'
-            placeholder='Enter your username'
-            required
-            value={username}
-            onChange={event => setUsername(event.target.value)}
-          />
-        </div>
-
-        <div className='login-input-group mb-4'>
-          <label
-            className='login-label mb-1 block text-sm font-medium text-gray-700'
-            htmlFor='password'
-          >
-            Password:
-          </label>
-          <input
-            className='login-input w-full rounded-md border'
-            id='password'
-            type='password'
-            placeholder='Enter your password'
-            required
-            value={password}
-            onChange={event => setPassword(event.target.value)}
-          />
-        </div>
-
-        <div className='login-button-group mb-4 flex  items-center'>
-          <button className='login-button' type='submit'>
-            Sign In
-          </button>
-        </div>
-        {isSubmitted && (
-          <p className='login-success-message'>Login successful!</p>
-        )}
-        <a className='login-create-account ' href='./Signup'>
-          Create an account
-        </a>
-      </form>
-    </div>
-  )
-} */
-
 export default function AuthForm() {
+  const router = useRouter()
   const [isSignUpVisible, setIsSignUpVisible] = useState(false)
   const [formSignUp, setFormSignUp] = useState({
     name: '',
@@ -139,19 +48,30 @@ export default function AuthForm() {
       })
 
       if (response.ok) {
-      const data = await response.json();
-      const authToken = data.authToken; // Assuming the token key is 'authToken' in your response
+        // The user was created
+        const data = await response.json()
+        console.log('Signup successful, user created:', data)
 
-      if (authToken) {
-        // You have received an authentication token
-        console.log('Received auth token:', authToken);
-        // Store the token securely, e.g., in a cookie or local storage
+        // Now we want to log the user in automatically
+        // We call the signIn function from NextAuth
+        const signInResponse = await signIn('credentials', {
+          redirect: false,
+          email: formSignUp.email,
+          password: formSignUp.password,
+        })
+
+        if (signInResponse?.ok) {
+          // Successfully started the sign-in process
+          router.push('/')
+        } else {
+          // Handle the case where sign-in after signup didn't work
+          console.error('Sign-in after signup failed')
+        }
+      } else {
+        // Handle errors, e.g., display error message
+        const errorData = await response.json() // This assumes the server responds with JSON-formatted error messages
+        console.error('Signup was not successful:', errorData)
       }
-
-      // Handle successful signup, e.g., redirect or show a success message
-    } else {
-      // Handle errors, e.g., display error message
-    }
     } catch (error) {
       console.error('Signup failed:', error)
       // Handle submission error
@@ -159,19 +79,25 @@ export default function AuthForm() {
   }
 
   const handleSignIn = async e => {
-  e.preventDefault();
-  try {
-    const result = await signIn('credentials', {
-      redirect: "/",
-      email: formSignIn.email,
-      password:formSignIn.password ,
-    })
-    console.log(result)
-  } catch (error) {
-    console.error('Sign-in failed:', error);
-    // Handle submission error
+    e.preventDefault()
+    try {
+      const result = await signIn('credentials', {
+        redirect: false, // Disable automatic redirection
+        email: formSignIn.email,
+        password: formSignIn.password,
+      })
+
+      if (result.ok) {
+        router.push('/') // Use the router to navigate to the homepage
+      } else {
+        // Handle cases where sign-in was unsuccessful
+        // For example, you might want to show an error message to the user
+      }
+    } catch (error) {
+      console.error('Sign-in failed:', error)
+      // Handle submission error, such as displaying an error message
+    }
   }
-}
 
   return (
     <>
