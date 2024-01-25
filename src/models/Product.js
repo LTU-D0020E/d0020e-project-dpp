@@ -12,19 +12,12 @@ const eventSchema = new Schema(
   { _id: false }
 )
 
-const has_event_trail = new Schema(
-  {
-    privacy: String,
-    event: [eventSchema],
-  },
-  { _id: false }
-)
-
 const componentSchema = new Schema(
   {
     id: Number,
+    name: String,
     dpp_class: String,
-    has_event_trail: [has_event_trail],
+    _id: Schema.Types.ObjectId,
   },
   { _id: false }
 )
@@ -41,25 +34,25 @@ const productSchema = new Schema(
       privacy: String,
     },
     created_at: {
-      creation_time: Date, // Assuming this should be a Date type
+      creation_time: String, // Assuming this should be a Date type
       privacy: String,
     },
-    has_carbon_footprint: {
+    carbon_footprint: {
       id: Number,
       dpp_class: String,
       privacy: String,
       effect: String,
     },
-    main_component: {
+    key_components: {
       privacy: String,
       component: [componentSchema],
     },
-    has_crm: {
+    crm: {
       id: Number,
       dpp_class: String,
       privacy: String,
     },
-    has_event_trail: {
+    event_trail: {
       privacy: String,
       event: [eventSchema], // Define a separate schema for events
     },
