@@ -209,8 +209,9 @@ function ProductDetails({ product }) {
                               <p>ID: {component.id}</p>
                               <p>DPP Class: {component.dpp_class}</p>
                               <p>
-                                Name:
+                                Name:&nbsp;
                                 <a
+                                  className='text-teal-600'
                                   href={`http://localhost:3000/product/${component._id}`}
                                 >
                                   {component.name}
