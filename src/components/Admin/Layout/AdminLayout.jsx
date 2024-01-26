@@ -13,15 +13,10 @@ import {
   ChartBarIcon,
 } from '@heroicons/react/24/solid'
 import Image from 'next/image'
+import Dashboard from '../Components/sections/dashboard'
+import Users from '../Components/sections/users'
+import Roles from '../Components/sections/roles'
 
-const navigation = [
-  { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
-  { name: 'Users', href: '#', icon: UserIcon, current: false },
-  { name: 'Groups', href: '#', icon: UserGroupIcon, current: false },
-  { name: 'Materials', href: '#', icon: CpuChipIcon, current: false },
-  { name: 'Products', href: '#', icon: InboxStackIcon, current: false },
-  { name: 'Logs', href: '#', icon: DocumentTextIcon, current: false },
-]
 const teams = [
   { id: 1, name: 'Heroicons', href: '#', initial: 'H', current: false },
   { id: 2, name: 'Tailwind Labs', href: '#', initial: 'T', current: false },
@@ -34,6 +29,67 @@ function classNames(...classes) {
 
 export default function AdminLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [selectedSection, setSelectedSection] = useState('Dashboard')
+
+  const handleNavigationClick = (sectionName, event) => {
+    setSelectedSection(sectionName)
+  }
+
+  const renderSelectedSection = () => {
+    switch (selectedSection) {
+      case 'Dashboard':
+        return <Dashboard />
+      case 'Users':
+        return <Users />
+      case 'Roles':
+        return <Roles />
+      case 'Products':
+        return <Products />
+      case 'Logs':
+        return <Logs />
+      // Add cases for other sections as needed
+      default:
+        return <p>Selected Section: {selectedSection}</p>
+    }
+  }
+
+  const navigation = [
+    {
+      name: 'Dashboard',
+      href: '#dashboard',
+      icon: HomeIcon,
+      current: selectedSection === 'Dashboard',
+      onClick: e => handleNavigationClick('Dashboard', e),
+    },
+    {
+      name: 'Users',
+      href: '#users',
+      icon: UserIcon,
+      current: selectedSection === 'Users',
+      onClick: e => handleNavigationClick('Users', e),
+    },
+    {
+      name: 'Roles',
+      href: '#roles',
+      icon: UserGroupIcon,
+      current: selectedSection === 'Roles',
+      onClick: e => handleNavigationClick('Roles', e),
+    },
+    {
+      name: 'Products',
+      href: '#',
+      icon: InboxStackIcon,
+      current: selectedSection === 'Products',
+      onClick: e => handleNavigationClick('Products', e),
+    },
+    {
+      name: 'Logs',
+      href: '#',
+      icon: DocumentTextIcon,
+      current: selectedSection === 'Logs',
+      onClick: e => handleNavigationClick('Logs', e),
+    },
+  ]
 
   return (
     <>
@@ -99,11 +155,12 @@ export default function AdminLayout() {
                               <li key={item.name}>
                                 <a
                                   href={item.href}
+                                  onClick={e => item.onClick(e)}
                                   className={classNames(
                                     item.current
                                       ? 'bg-indigo-700 text-white'
                                       : 'text-indigo-200 hover:bg-indigo-700 hover:text-white',
-                                    'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6'
+                                    'group flex cursor-pointer gap-x-3 rounded-md p-2 text-sm font-semibold leading-6'
                                   )}
                                 >
                                   <item.icon
@@ -116,31 +173,6 @@ export default function AdminLayout() {
                                     aria-hidden='true'
                                   />
                                   {item.name}
-                                </a>
-                              </li>
-                            ))}
-                          </ul>
-                        </li>
-                        <li>
-                          <div className='text-xs font-semibold leading-6 text-indigo-200'>
-                            Your teams
-                          </div>
-                          <ul role='list' className='-mx-2 mt-2 space-y-1'>
-                            {teams.map(team => (
-                              <li key={team.name}>
-                                <a
-                                  href={team.href}
-                                  className={classNames(
-                                    team.current
-                                      ? 'bg-indigo-700 text-white'
-                                      : 'text-indigo-200 hover:bg-indigo-700 hover:text-white',
-                                    'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6'
-                                  )}
-                                >
-                                  <span className='flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-indigo-400 bg-indigo-500 text-[0.625rem] font-medium text-white'>
-                                    {team.initial}
-                                  </span>
-                                  <span className='truncate'>{team.name}</span>
                                 </a>
                               </li>
                             ))}
@@ -176,11 +208,12 @@ export default function AdminLayout() {
                       <li key={item.name}>
                         <a
                           href={item.href}
+                          onClick={e => item.onClick(e)}
                           className={classNames(
                             item.current
                               ? 'bg-indigo-700 text-white'
                               : 'text-indigo-200 hover:bg-indigo-700 hover:text-white',
-                            'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6'
+                            'group flex cursor-pointer gap-x-3 rounded-md p-2 text-sm font-semibold leading-6'
                           )}
                         >
                           <item.icon
@@ -197,45 +230,6 @@ export default function AdminLayout() {
                       </li>
                     ))}
                   </ul>
-                </li>
-                <li>
-                  <div className='text-xs font-semibold leading-6 text-indigo-200'>
-                    Your teams
-                  </div>
-                  <ul role='list' className='-mx-2 mt-2 space-y-1'>
-                    {teams.map(team => (
-                      <li key={team.name}>
-                        <a
-                          href={team.href}
-                          className={classNames(
-                            team.current
-                              ? 'bg-indigo-700 text-white'
-                              : 'text-indigo-200 hover:bg-indigo-700 hover:text-white',
-                            'group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6'
-                          )}
-                        >
-                          <span className='flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-indigo-400 bg-indigo-500 text-[0.625rem] font-medium text-white'>
-                            {team.initial}
-                          </span>
-                          <span className='truncate'>{team.name}</span>
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </li>
-                <li className='-mx-6 mt-auto'>
-                  <a
-                    href='#'
-                    className='flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-white hover:bg-indigo-700'
-                  >
-                    <img
-                      className='h-8 w-8 rounded-full bg-indigo-700'
-                      src='https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-                      alt=''
-                    />
-                    <span className='sr-only'>Your profile</span>
-                    <span aria-hidden='true'>Tom Cook</span>
-                  </a>
                 </li>
               </ul>
             </nav>
@@ -254,63 +248,10 @@ export default function AdminLayout() {
           <div className='flex-1 text-sm font-semibold leading-6 text-white'>
             Dashboard
           </div>
-          <a href='#'>
-            <span className='sr-only'>Your profile</span>
-            <img
-              className='h-8 w-8 rounded-full bg-indigo-700'
-              src='https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-              alt=''
-            />
-          </a>
         </div>
 
-        <main className='h-screen bg-gray-100 py-10 lg:pl-72'>
-          <div className='px-4 sm:px-6 lg:px-8'>
-            <div className='flex flex-row justify-center space-x-20'>
-              <div className='flex h-60 w-60 flex-col items-center justify-center rounded-lg bg-white shadow-md'>
-                <div className='flex flex-col items-center space-y-2'>
-                  <UserIcon className='w-20 text-blue-600' />
-                  <p className='text-3xl font-semibold'>1359</p>
-                </div>
-                <p className='text-gray-300 '>User count</p>
-              </div>
-              <div className='flex h-60 w-60 flex-col items-center justify-center rounded-lg bg-white shadow-md'>
-                <div className='flex flex-col items-center space-y-2'>
-                  <UserGroupIcon className='w-20 text-blue-600' />
-                  <p className='text-3xl font-semibold'>1359</p>
-                </div>
-                <p className='text-gray-300 '>Group count</p>
-              </div>
-              <div className='flex h-60 w-60 flex-col items-center justify-center rounded-lg bg-white shadow-md'>
-                <div className='flex flex-col items-center space-y-2'>
-                  <CpuChipIcon className='w-20 text-blue-600' />
-                  <p className='text-3xl font-semibold'>1359</p>
-                </div>
-                <p className='text-gray-300 '>Material count</p>
-              </div>
-              <div className='flex h-60 w-60 flex-col items-center justify-center rounded-lg bg-white shadow-md'>
-                <div className='flex flex-col items-center space-y-2'>
-                  <CpuChipIcon className='w-20 text-blue-600' />
-                  <p className='text-3xl font-semibold'>1359</p>
-                </div>
-                <p className='text-gray-300 '>Product count</p>
-              </div>
-            </div>
-            <div className='mt-10 flex flex-row justify-center space-x-20 '>
-              <div className='flex h-20 w-80 flex-col items-center justify-center rounded-lg bg-white shadow-md'>
-                <div className='flex flex-col items-center space-y-2'>
-                  <p className='font-bold'>Database Connectivity</p>
-                  <div className='flex flex-row space-x-2'>
-                    <ChartBarIcon className='w-5 text-emerald-500' />
-                    <p>Connected</p>
-                  </div>
-                </div>
-              </div>
-              <div className='flex h-20 w-80 flex-col items-center justify-center rounded-lg bg-white shadow-md'>
-                <div className='flex flex-col items-center space-y-2'></div>
-              </div>
-            </div>
-          </div>
+        <main className='h-screen bg-gray-100 lg:pl-72'>
+          {renderSelectedSection()}
         </main>
       </div>
     </>

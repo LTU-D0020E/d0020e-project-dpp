@@ -1,6 +1,7 @@
 import { connectToDatabase, objectToFieldUpdates } from '@/utils/server/db'
 import { getServerSession } from 'next-auth'
 import NextAuth from 'next-auth/next'
+import { extractPaginationInfoFromQuery, paginatedGet } from './pagination'
 
 export const DEFAULT_AUTHORIZER = async (options, req, session) => {
   if (options.requiresAuth || options.requiresAdmin) {
@@ -89,6 +90,29 @@ export const defaultGet = (entity, idSlug = 'id', options = {}) => {
     }
     return notFound(res)
   }
+}
+
+export const defaultGetAll = (entity, options = {}) => {
+  const effectiveOptions = {
+    ...DEFAULT_GLOBAL_OPTIONS,
+    ...DEFAULT_METHOD_OPTIONS,
+    ...options,
+  }
+  const __defaultFn = async (req, res, session) => {
+    if (
+      effectiveOptions.authorizer &&
+      !(await effectiveOptions.authorizer(effectiveOptions, req, session))
+    ) {
+      return unauthorized(res)
+    }
+    const paginationInfo = extractPaginationInfoFromQuery(req)
+    const response = await paginatedGet(entity, paginationInfo)
+    if (response.data && effectiveOptions.renderer) {
+      response.data = effectiveOptions.renderer(response.data, session)
+    }
+    return successWithJson(res, response)
+  }
+  return __defaultFn
 }
 
 export const defaultUpdate = (

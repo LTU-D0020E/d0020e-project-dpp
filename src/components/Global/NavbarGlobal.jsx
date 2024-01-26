@@ -4,6 +4,7 @@ import clsx from 'clsx'
 import { Container } from '../utils/Container'
 import { HomeIcon } from '@heroicons/react/24/outline'
 import Example from '../UI/Forms/UserDropdown'
+import SearchBar from './SearchBar'
 
 export function Header(props) {
   const router = useRouter()
@@ -16,6 +17,9 @@ export function Header(props) {
           <a href='#' className='h-full'>
             <HomeIcon className='h-full cursor-pointer rounded-full p-2 text-gray-800 transition duration-200 ease-in-out hover:text-teal-600' />
           </a>
+
+          <SearchBar />
+
           <div className='nav-links-container flex flex-row items-center space-x-4 text-lg'>
             <a
               href='#'
