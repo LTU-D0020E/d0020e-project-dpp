@@ -43,8 +43,6 @@ export default function AdminLayout() {
         return <Users />
       case 'Roles':
         return <Roles />
-      case 'Materials':
-        return <Materials />
       case 'Products':
         return <Products />
       case 'Logs':
@@ -76,13 +74,6 @@ export default function AdminLayout() {
       icon: UserGroupIcon,
       current: selectedSection === 'Roles',
       onClick: e => handleNavigationClick('Roles', e),
-    },
-    {
-      name: 'Materials',
-      href: '#',
-      icon: CpuChipIcon,
-      current: selectedSection === 'Materials',
-      onClick: e => handleNavigationClick('Materials', e),
     },
     {
       name: 'Products',
@@ -240,18 +231,6 @@ export default function AdminLayout() {
                     ))}
                   </ul>
                 </li>
-
-                <li className='-mx-6 mt-auto'>
-                  <a className='flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-white hover:bg-indigo-700'>
-                    <img
-                      className='h-8 w-8 rounded-full bg-indigo-700'
-                      src='https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-                      alt=''
-                    />
-                    <span className='sr-only'>Your profile</span>
-                    <span aria-hidden='true'>Tom Cook</span>
-                  </a>
-                </li>
               </ul>
             </nav>
           </div>
@@ -269,14 +248,6 @@ export default function AdminLayout() {
           <div className='flex-1 text-sm font-semibold leading-6 text-white'>
             Dashboard
           </div>
-          <a href='#'>
-            <span className='sr-only'>Your profile</span>
-            <img
-              className='h-8 w-8 rounded-full bg-indigo-700'
-              src='https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-              alt=''
-            />
-          </a>
         </div>
 
         <main className='h-screen bg-gray-100 lg:pl-72'>
