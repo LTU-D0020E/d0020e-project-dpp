@@ -3,6 +3,7 @@ import LayoutGlobal from '@/components/Layout/LayoutGlobal'
 import { Container } from '@/components/utils/Container'
 import { useEffect, useState } from 'react'
 import React from 'react'
+import { formatDate } from '@/utils/server/helpers'
 
 export async function getServerSideProps(context) {
   const { productId } = context.params
@@ -28,43 +29,6 @@ export async function getServerSideProps(context) {
     }
   }
 }
-/*
-export default function ProductPage({ product }) {
-  // Function to recursively render product properties, including nested objects/arrays
-  const renderProductData = data => {
-    if (Array.isArray(data)) {
-      return (
-        <ul>
-          {data.map((item, index) => (
-            <li key={index}>{renderProductData(item)}</li>
-          ))}
-        </ul>
-      )
-    } else if (typeof data === 'object' && data !== null) {
-      return (
-        <ul>
-          {Object.entries(data).map(([key, value]) => (
-            <li key={key}>
-              <strong>{key}:</strong> {renderProductData(value)}
-            </li>
-          ))}
-        </ul>
-      )
-    } else {
-      return data.toString()
-    }
-  }
-
-  return (
-    <div>
-      <h1>Product Details</h1>
-      {renderProductData(product)}
-    </div>
-  )
-}
-*/
-
-//*
 
 const extractObjects = data => {
   const events = []
@@ -156,7 +120,7 @@ function ProductDetails({ product }) {
                     Creation time
                   </dt>
                   <dd className='mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0'>
-                    {product.created_at.creation_time}
+                    {formatDate(product.created_at.creation_time)}
                   </dd>
                 </div>
                 {product.carbon_footprint.effect != null && (
@@ -169,7 +133,7 @@ function ProductDetails({ product }) {
                     </dd>
                   </div>
                 )}
-                {product.crm > 0 && (
+                {product.crm !== undefined && (
                   <div className='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
                     <dt className='text-sm font-medium leading-6 text-gray-900'>
                       Crm
@@ -179,24 +143,27 @@ function ProductDetails({ product }) {
                     </dd>
                   </div>
                 )}
-                <div>
-                  <details className='rounded-lg p-6 open:bg-white open:shadow-lg open:ring-1 open:ring-black/5 dark:open:bg-slate-900 dark:open:ring-white/10'>
-                    <summary className='select-none text-sm font-semibold leading-6 text-slate-900 dark:text-white'>
-                      Events
-                    </summary>
-                    <div className='mt-3 text-sm leading-6 text-slate-600 dark:text-slate-400'>
-                      {nestedObjects.hasEvents.map((component, index) => (
-                        <div key={index}>
-                          <p>ID: {component.id}</p>
-                          <p>DPP Class: {component.dpp_class}</p>
-                          <p>Creation Time: {component.creation_time}</p>
-                          <p>Action: {component.action}</p>
-                          <br></br>
-                        </div>
-                      ))}
-                    </div>
-                  </details>
-
+                <div className='flex flex-col space-y-4'>
+                  {nestedObjects.hasEvents.length > 0 && (
+                    <details className='rounded-lg p-6 open:bg-white open:shadow-lg open:ring-1 open:ring-black/5 dark:open:bg-slate-900 dark:open:ring-white/10'>
+                      <summary className='select-none text-sm font-semibold leading-6 text-slate-900 dark:text-white'>
+                        Events
+                      </summary>
+                      <div className='mt-3 text-sm leading-6 text-slate-600 dark:text-slate-400'>
+                        {nestedObjects.hasEvents.map((component, index) => (
+                          <div key={index}>
+                            <p>ID: {component.id}</p>
+                            <p>
+                              Creation Time:{' '}
+                              {formatDate(component.creation_time)}
+                            </p>
+                            <p>Action: {component.action}</p>
+                            <br></br>
+                          </div>
+                        ))}
+                      </div>
+                    </details>
+                  )}
                   {nestedObjects.componentObjects.length > 0 && (
                     <details className='rounded-lg p-6 open:bg-white open:shadow-lg open:ring-1 open:ring-black/5 dark:open:bg-slate-900 dark:open:ring-white/10'>
                       <summary className='select-none text-sm font-semibold leading-6 text-slate-900 dark:text-white'>
@@ -229,18 +196,21 @@ function ProductDetails({ product }) {
             </div>
           </div>
         </div>
-        <div className='mt-16 flex flex-row content-center'>
-          <div className='flex h-56 w-72 rounded-md border-2'>
-            <div className='flex border-b-2 px-2'>
-              <dl className=''>
-                <dt>Weight</dt>
-              </dl>
-            </div>
-          </div>
-        </div>
       </Container>
     </LayoutGlobal>
   )
 }
 
 export default ProductDetails
+
+/*
+<div className='mt-16 flex flex-row content-center'>
+<div className='flex h-56 w-72 rounded-md border-2'>
+  <div className='flex border-b-2 px-2'>
+    <dl className=''>
+      <dt>Weight</dt>
+    </dl>
+  </div>
+</div>
+</div>
+*/
