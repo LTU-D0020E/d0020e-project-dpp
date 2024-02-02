@@ -21,6 +21,11 @@ body {
   background-color: #f4f4f5; /* zinc-100 */
 }
 
+.active {
+  background-color: #0d9488;
+  color: #f4f4f5;
+}
+
 .container {
   background-color: #fff;
   border-radius: 30px;

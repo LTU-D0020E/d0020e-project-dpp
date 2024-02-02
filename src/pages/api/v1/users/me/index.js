@@ -1,29 +1,45 @@
 import { defaultHandler, unauthorized } from '@/utils/server/api-helpers'
 import User from '@/models/User'
 
-const getCurrentUser = async (req, res, session) => {
-  console.log('Här är vår session: ', session)
-  console.log('Här är vår request: ', req.query)
-  
-  if (!session) {
-    return unauthorized(res)
-  }
-  
-  try {
-    if (session.user.email !== req.query.userid) {
-      return res.status(401).json({message: 'Session matchar inte ID'})
-    }
+export async function getServerSideProps(context) {
+  const { profileID } = context.params;
 
-    const user = await User.findById(req.query.userid)
+  // Extract session and query parameters from the context
+  const { req, res, query, session } = context;
+
+  // Check if the session exists and matches the query parameter
+  if (!session || session.user.email !== query.userid) {
+    return {
+      redirect: {
+        destination: '/login', // Redirect to login page if session doesn't exist or doesn't match
+        permanent: false,
+      },
+    };
+  }
+
+  try {
+    // Fetch user data based on the query parameter
+    const user = await User.findById(query.userid);
 
     if (!user) {
-        return res.status(404).json({ message: 'User not found' });
+      return {
+        notFound: true, // Return 404 if user is not found
+      };
     }
 
-    res.json({ name, email, role });
+    // Pass user data as props to the component
+    return {
+      props: {
+        user,
+      },
+    };
   } catch (error) {
-      console.error('Error fetching user:', error);
-      res.status(500).json({ message: 'Server Error' });
+    console.error('Error fetching user:', error);
+    return {
+      props: {
+        error: 'Server Error',
+      },
+    };
   }
 }
 
@@ -32,7 +48,7 @@ const handler = async (req, res) =>
     req,
     res,
     {
-      GET: getCurrentUser,
+      GET: getServerSideProps,
     },
     {
       requiresAuth: true,
