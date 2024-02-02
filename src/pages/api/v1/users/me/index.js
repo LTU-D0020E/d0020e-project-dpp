@@ -1,41 +1,29 @@
-import { defaultHandler } from '@/utils/server/api-helpers'
+import { defaultHandler, unauthorized } from '@/utils/server/api-helpers'
 import User from '@/models/User'
 
-// Define handleSignup before using it in the handler
-const getCurrentUser = async (req, res) => {
+const getCurrentUser = async (req, res, session) => {
+  console.log('Här är vår session: ', session)
+  console.log('Här är vår request: ', req.query)
+  
+  if (!session) {
+    return unauthorized(res)
+  }
+  
   try {
-    const { name, email, password, role } = req.body
-
-    // Check if the user already exists
-    const existingUser = await User.findOne({ email })
-    if (existingUser) {
-      console.log('user already exists')
-      return res.status(409).json({ message: 'User already exists' })
+    if (session.user.email !== req.query.userid) {
+      return res.status(401).json({message: 'Session matchar inte ID'})
     }
 
-    // Hash the password
-    const hashedPassword = await hashPassword(password)
+    const user = await User.findById(req.query.userid)
 
-    // Create a new user
-    const user = new User({
-      name,
-      email,
-      password: hashedPassword,
-      role, // or set a default role if not provided
-      admin: false, // Set admin to false by default
-    })
+    if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+    }
 
-    // Save the user
-    await user.save()
-
-    // // Generate a JWT token
-    // const authToken = generateAuthToken(user); // Implement this function to generate a token
-
-    // Respond with success and include the token in the response
-    return res.status(201).json({ message: 'User created successfully' })
+    res.json({ name, email, role });
   } catch (error) {
-    console.error('Error creating user:', error)
-    return res.status(500).json({ message: 'Internal server error' })
+      console.error('Error fetching user:', error);
+      res.status(500).json({ message: 'Server Error' });
   }
 }
 
@@ -47,7 +35,7 @@ const handler = async (req, res) =>
       GET: getCurrentUser,
     },
     {
-      requiresAuth: false,
+      requiresAuth: true,
       requiresAdmin: false,
     }
   )

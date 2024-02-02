@@ -10,13 +10,33 @@ import { ClipboardDocumentListIcon } from '@heroicons/react/24/outline'
 import { QrCodeIcon } from '@heroicons/react/24/outline'
 
 import ReactModal from 'react-modal'
+import axios from 'axios';
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   const [activePage, setActivePage] = useState(1)
+  const [userData, setUserData] = useState(null);
 
-  useEffect(() => {}, [])
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await fetch(
+          `/api/v1/users/me`
+        )
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        console.log('Fetched user data:', data); // Log the fetched data
+        setUserData(data); // Update userData state with the fetched data
+      } catch (error) {
+        console.error('Failed to fetch user data:', error);
+      }
+    };
+  
+    fetchUser(); // Call the function to fetch user data when the component mounts
+  }, []);
 
   const handleButtonClick = pageNumber => {
     setActivePage(pageNumber)
@@ -101,7 +121,7 @@ export default function Home() {
                         Full name
                       </dt>
                       <dd class='mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0'>
-                        Aron Gunnar
+                         {/* fetch name? */}
                       </dd>
                     </div>
                     <div class='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
