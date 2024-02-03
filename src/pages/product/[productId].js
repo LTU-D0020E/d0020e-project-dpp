@@ -7,7 +7,7 @@ import { formatDate } from '@/utils/server/helpers'
 import Link from 'next/link'
 
 export async function getServerSideProps(context) {
-  console.log('context', context)
+  console.log('context', context.params)
   const { productId } = context.params
 
   //const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL //REDO THIS LATER WE CANT HAVE BASE URL SHOULD WORK TO JUST DO /api/v1/product/${productID}
