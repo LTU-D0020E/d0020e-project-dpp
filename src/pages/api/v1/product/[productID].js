@@ -5,12 +5,11 @@ import Product from '@/models/Product'
 const getProductById = async (req, res) => {
   try {
     const { productId } = req.query
-
+    console.log('heres the productid', productId)
     if (!ObjectId.isValid(productId)) {
       return res.status(400).json({ message: 'Invalid ID' })
     }
 
-    // Use 'new' to create a new instance of ObjectId
     const productData = await Product.findOne({ _id: new ObjectId(productId) })
 
     if (!productData) {
