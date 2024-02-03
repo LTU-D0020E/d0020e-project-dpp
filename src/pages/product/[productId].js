@@ -4,6 +4,7 @@ import { Container } from '@/components/utils/Container'
 import { useEffect, useState } from 'react'
 import React from 'react'
 import { formatDate } from '@/utils/server/helpers'
+import Link from 'next/link'
 
 export async function getServerSideProps(context) {
   const { productId } = context.params
@@ -11,7 +12,9 @@ export async function getServerSideProps(context) {
   //const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL //REDO THIS LATER WE CANT HAVE BASE URL SHOULD WORK TO JUST DO /api/v1/product/${productID}
 
   try {
-    const res = await fetch(`http://localhost:3000/api/v1/product/${productId}`) // Use backticks for template literal
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/product/${productId}`
+    ) // Use backticks for template literal
 
     if (!res.ok) {
       throw new Error(`Failed to fetch product, status: ${res.status}`) // Template literal
@@ -177,12 +180,12 @@ function ProductDetails({ product }) {
                               <p>DPP Class: {component.dpp_class}</p>
                               <p>
                                 Name:&nbsp;
-                                <a
+                                <Link
                                   className='text-teal-600'
-                                  href={`http://localhost:3000/product/${component._id}`}
+                                  href={`/product/${component._id}`}
                                 >
                                   {component.name}
-                                </a>
+                                </Link>
                               </p>
                               <br></br>
                             </div>
@@ -202,15 +205,3 @@ function ProductDetails({ product }) {
 }
 
 export default ProductDetails
-
-/*
-<div className='mt-16 flex flex-row content-center'>
-<div className='flex h-56 w-72 rounded-md border-2'>
-  <div className='flex border-b-2 px-2'>
-    <dl className=''>
-      <dt>Weight</dt>
-    </dl>
-  </div>
-</div>
-</div>
-*/
