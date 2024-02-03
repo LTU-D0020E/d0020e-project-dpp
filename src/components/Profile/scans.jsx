@@ -1,4 +1,24 @@
+import { PencilIcon } from '@heroicons/react/24/outline'
+import ReactModal from 'react-modal'
+import { useState } from 'react'
+
 export default function Scans({ user }) {
+  const [activeModal, setActiveModal] = useState(null)
+  const openModal = modalNumber => {
+    setActiveModal(modalNumber)
+  }
+  const closeModal = () => {
+    setActiveModal(null)
+  }
+
+  const [form, setForm] = useState({
+    name: '',
+  })
+
+  const handleSubmit = async e => {
+    e.preventDefault()
+  }
+
   return (
     <div className=''>
       <div className='px-4 sm:px-0'>

@@ -1,3 +1,6 @@
+import { PencilIcon } from '@heroicons/react/24/outline'
+import ReactModal from 'react-modal'
+
 export default function Settings({ user }) {
   return (
     <div className=''>
@@ -22,7 +25,7 @@ export default function Settings({ user }) {
                     className='w-[200px] rounded-lg p-1'
                     type='text'
                     id='name'
-                    value='Aron Gunnar'
+                    value={user.name} /* Name */
                   />
                 </div>
                 <div className='mx-[110px] text-sm leading-6 text-gray-700'>
@@ -46,7 +49,7 @@ export default function Settings({ user }) {
                     className='w-[200px] rounded-lg p-1'
                     type='text'
                     id='name'
-                    value='argun-9@student.ltu.se'
+                    value={user.email} /* Email */
                   />
                 </div>
                 <div className='mx-[110px] text-sm leading-6 text-gray-700'>
@@ -70,7 +73,7 @@ export default function Settings({ user }) {
                     className='w-[200px] rounded-lg p-1'
                     type='text'
                     id='name'
-                    value='**********'
+                    value={user.name} /* Password */
                   />
                 </div>
                 <div className='mx-[110px] text-sm leading-6 text-gray-700'>

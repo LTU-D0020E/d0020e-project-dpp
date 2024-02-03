@@ -15,10 +15,11 @@ import { useRouter } from 'next/router'
 import Account from '@/components/Profile/account'
 import Settings from '@/components/Profile/settings'
 import Scans from '@/components/Profile/scans'
+import Event from '@/components/Profile/event'
 
 export default function Profile() {
   const router = useRouter()
-  const userid = router.query.userid // Assuming your dynamic route is /users/[userId]
+  const userid = router.query.userid
 
   const { data: session } = useSession()
   const {
@@ -27,45 +28,24 @@ export default function Profile() {
     isValidating,
   } = useSWR(userid ? `/api/v1/users/me/${userid}` : null)
 
-  // Check if data is still being fetched
+  // These lines should be at the top, before any conditional logic
+  const [activePage, setActivePage] = useState(1)
+  const handleButtonClick = pageNumber => {
+    setActivePage(pageNumber)
+  }
+
+  // Conditional rendering logic should come after hook calls
   if (isValidating) {
     return <div>Loading...</div>
   }
-
-  // Handle error state
   if (error) {
     return <div>Error loading user data</div>
   }
-
-  // Ensure that user object is available before accessing its properties
   if (!user || !user.name) {
     return <div>No user data available</div>
   }
 
   console.log(user.name)
-
-  const [activePage, setActivePage] = useState(1) // This line should not be conditionally rendered
-  const handleButtonClick = pageNumber => {
-    setActivePage(pageNumber)
-  }
-
-  const [activeModal, setActiveModal] = useState(null)
-
-  const openModal = modalNumber => {
-    setActiveModal(modalNumber)
-  }
-
-  const closeModal = () => {
-    setActiveModal(null)
-  }
-
-  const [form, setForm] = useState({
-    name: '',
-  })
-
-  const handleSubmit = async e => {
-    e.preventDefault()
-  }
 
   return (
     <LayoutGlobal>

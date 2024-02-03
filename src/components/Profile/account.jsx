@@ -1,3 +1,6 @@
+import { PencilIcon } from '@heroicons/react/24/outline'
+import ReactModal from 'react-modal'
+
 export default function Account({ user }) {
   return (
     <div>
@@ -17,7 +20,6 @@ export default function Account({ user }) {
             </dt>
             <dd className='mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0'>
               {user.name}
-              {/* fetch name? */}
             </dd>
           </div>
           <div className='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
@@ -25,7 +27,7 @@ export default function Account({ user }) {
               Role
             </dt>
             <dd className='mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0'>
-              Admin
+              {user.role}
             </dd>
           </div>
           <div className='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
@@ -33,7 +35,7 @@ export default function Account({ user }) {
               Email address
             </dt>
             <dd className='mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0'>
-              a*******@student.ltu.se
+              {user.email}
             </dd>
           </div>
           <div className='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
