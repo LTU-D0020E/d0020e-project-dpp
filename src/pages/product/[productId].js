@@ -10,12 +10,11 @@ export async function getServerSideProps(context) {
   console.log('context', context.params)
   const { productId } = context.params
 
-  //const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL //REDO THIS LATER WE CANT HAVE BASE URL SHOULD WORK TO JUST DO /api/v1/product/${productID}
+  const fetchUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/product/${productId}`
 
   try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/product/${productId}`
-    ) // Use backticks for template literal
+    console.log(`Fetching URL: ${fetchUrl}`)
+    const res = await fetch('this is our fetchurl', fetchUrl)
 
     if (!res.ok) {
       throw new Error(`Failed to fetch product, status: ${res.status}`)
