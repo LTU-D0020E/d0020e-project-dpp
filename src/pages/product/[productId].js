@@ -17,7 +17,7 @@ export async function getServerSideProps(context) {
     ) // Use backticks for template literal
 
     if (!res.ok) {
-      throw new Error(`Failed to fetch product, status: ${res.status}`) // Template literal
+      throw new Error(`Failed to fetch product, status: ${res.status}`)
     }
 
     const productData = await res.json()
@@ -92,6 +92,7 @@ const extractObjects = data => {
     componentObjects: components,
   }
 }
+
 function ProductDetails({ product }) {
   const nestedObjects = extractObjects(product)
 

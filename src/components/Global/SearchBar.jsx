@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react'
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid'
+import clsx from 'clsx'
 import SearchField from '../UI/Forms/SearchField'
 import SearchResultCard from '../UI/global/SearchResultCard'
+import Link from 'next/link'
 
-export default function SearchBar() {
+export default function SearchBar({ className, ...props }) {
   const [searchTerm, setSearchTerm] = useState('')
   const [searchResult, setSearchResult] = useState([])
   const [loading, setLoading] = useState(false)
@@ -46,7 +48,7 @@ export default function SearchBar() {
   )
 
   return (
-    <div className='relative w-full md:w-[250px]'>
+    <div className={clsx('relative', className)}>
       <div className='relative w-full'>
         <div className='flex w-full items-center'>
           <SearchField
@@ -70,8 +72,8 @@ export default function SearchBar() {
               return null
             }
 
-            const uniqueKey = item.id || item.name + item.dpp_class + index
-
+            const uniqueKey = item._id || item.name + item.dpp_class + index
+            console.log(item)
             return (
               <li
                 key={uniqueKey}

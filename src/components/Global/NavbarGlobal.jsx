@@ -5,22 +5,32 @@ import { Container } from '../utils/Container'
 import { HomeIcon } from '@heroicons/react/24/outline'
 import Example from '../UI/Forms/UserDropdown'
 import SearchBar from './SearchBar'
+import Link from 'next/link'
 
-export function Header(props) {
+export function NavbarGlobal({ searchBar = true, navClassName }) {
   const router = useRouter()
   const [isElementVisible, setElementVisibility] = useState(false)
 
   return (
-    <header className={clsx('z-[150]', props.navClassName)}>
+    <header className={clsx('z-[150]', navClassName)}>
       <nav className='border-b p-3 shadow-md'>
-        <Container className='flex h-[52px] flex-row items-center justify-between'>
-          <a href='#' className='h-full'>
-            <HomeIcon className='h-full cursor-pointer rounded-full p-2 text-gray-800 transition duration-200 ease-in-out hover:text-teal-600' />
-          </a>
+        <Container className='flex h-[52px] items-center justify-between'>
+          {/* Left Section for Home Icon */}
+          <div className='relative flex h-full items-center justify-center'>
+            <Link href='/' className='flex h-full items-center'>
+              <HomeIcon className='h-14 cursor-pointer rounded-full p-2 text-gray-800 transition duration-200 ease-in-out hover:text-teal-600' />
+            </Link>
+          </div>
 
-          <SearchBar />
+          {/* Conditionally render SearchBar */}
+          {searchBar && (
+            <div className='absolute left-0 right-0 mx-auto w-max'>
+              <SearchBar />
+            </div>
+          )}
 
-          <div className='nav-links-container flex flex-row items-center space-x-4 text-lg'>
+          {/* Right Section for Navigation Links */}
+          <div className='flex items-center'>
             <a
               href='#'
               className='nav-links h-full cursor-pointer rounded-full p-2 font-semibold transition duration-200 ease-in-out hover:text-teal-600'

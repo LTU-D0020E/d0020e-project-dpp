@@ -1,10 +1,11 @@
 import Head from 'next/head'
-import { Header } from '../Global/NavbarGlobal'
+import { NavbarGlobal } from '../Global/NavbarGlobal'
 
 export default function LayoutGlobal({
   className,
   title,
   description = 'Digital Product Passport Project.',
+  searchBar = true,
   ...props
 }) {
   return (
@@ -18,7 +19,7 @@ export default function LayoutGlobal({
         />
         <meta property='og:description' content={description} />
       </Head>
-      <Header />
+      <NavbarGlobal searchBar={searchBar} />
       <main>
         <>{props.children}</>
       </main>
