@@ -3,6 +3,7 @@ import { ObjectId } from 'mongodb'
 import Product from '@/models/Product'
 
 const getProductById = async (req, res) => {
+  console.log('heres the req', req.query)
   try {
     const { productId } = req.query
     console.log('heres the productid', productId)
