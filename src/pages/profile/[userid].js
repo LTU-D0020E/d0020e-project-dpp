@@ -10,33 +10,37 @@ import { ClipboardDocumentListIcon } from '@heroicons/react/24/outline'
 import { QrCodeIcon } from '@heroicons/react/24/outline'
 
 import ReactModal from 'react-modal'
-import axios from 'axios';
+import axios from 'axios'
+
+import { useRouter } from 'next/router'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   const [activePage, setActivePage] = useState(1)
-  const [userData, setUserData] = useState(null);
+  const router = useRouter()
+  const { userID } = router.query
+  const [userData, setUserData] = useState(null)
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await fetch(
-          `/api/v1/users/me`
-        )
+        const response = await fetch(`/api/v1/users/me/${userID}`)
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error('Network response was not ok')
         }
-        const data = await response.json();
-        console.log('Fetched user data:', data); // Log the fetched data
-        setUserData(data); // Update userData state with the fetched data
+        const data = await response.json()
+        console.log('Fetched user data:', data) // Log the fetched data
+        setUserData(data) // Update userData state with the fetched data
       } catch (error) {
-        console.error('Failed to fetch user data:', error);
+        console.error('Failed to fetch user data:', error)
       }
-    };
-  
-    fetchUser(); // Call the function to fetch user data when the component mounts
-  }, []);
+    }
+
+    if (userID) {
+      fetchUser() // Call the function to fetch user data when the component mounts
+    }
+  }, [userID])
 
   const handleButtonClick = pageNumber => {
     setActivePage(pageNumber)
@@ -121,7 +125,7 @@ export default function Home() {
                         Full name
                       </dt>
                       <dd class='mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0'>
-                         {/* fetch name? */}
+                        {/* fetch name? */}
                       </dd>
                     </div>
                     <div class='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
