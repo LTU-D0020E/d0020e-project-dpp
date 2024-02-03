@@ -13,7 +13,7 @@ export async function getServerSideProps(context) {
     const res = await fetch(`http://localhost:3000/api/v1/product/${productId}`) // Use backticks for template literal
 
     if (!res.ok) {
-      throw new Error(`Failed to fetch product, status: ${res.status}`) // Template literal
+      throw new Error(`Failed to fetch product, status: ${res.status}`)
     }
 
     const productData = await res.json()
@@ -28,43 +28,6 @@ export async function getServerSideProps(context) {
     }
   }
 }
-/*
-export default function ProductPage({ product }) {
-  // Function to recursively render product properties, including nested objects/arrays
-  const renderProductData = data => {
-    if (Array.isArray(data)) {
-      return (
-        <ul>
-          {data.map((item, index) => (
-            <li key={index}>{renderProductData(item)}</li>
-          ))}
-        </ul>
-      )
-    } else if (typeof data === 'object' && data !== null) {
-      return (
-        <ul>
-          {Object.entries(data).map(([key, value]) => (
-            <li key={key}>
-              <strong>{key}:</strong> {renderProductData(value)}
-            </li>
-          ))}
-        </ul>
-      )
-    } else {
-      return data.toString()
-    }
-  }
-
-  return (
-    <div>
-      <h1>Product Details</h1>
-      {renderProductData(product)}
-    </div>
-  )
-}
-*/
-
-//*
 
 const extractObjects = data => {
   const events = []
@@ -125,6 +88,7 @@ const extractObjects = data => {
     componentObjects: components,
   }
 }
+
 function ProductDetails({ product }) {
   const nestedObjects = extractObjects(product)
 
@@ -179,7 +143,7 @@ function ProductDetails({ product }) {
                     </dd>
                   </div>
                 )}
-                <div>
+                <div className=''>
                   <details className='rounded-lg p-6 open:bg-white open:shadow-lg open:ring-1 open:ring-black/5 dark:open:bg-slate-900 dark:open:ring-white/10'>
                     <summary className='select-none text-sm font-semibold leading-6 text-slate-900 dark:text-white'>
                       Events

@@ -16,6 +16,7 @@ import Image from 'next/image'
 import Dashboard from '../Components/sections/dashboard'
 import Users from '../Components/sections/users'
 import Roles from '../Components/sections/roles'
+import Products from '../Components/sections/products'
 
 const teams = [
   { id: 1, name: 'Heroicons', href: '#', initial: 'H', current: false },
@@ -45,8 +46,6 @@ export default function AdminLayout() {
         return <Roles />
       case 'Products':
         return <Products />
-      case 'Logs':
-        return <Logs />
       // Add cases for other sections as needed
       default:
         return <p>Selected Section: {selectedSection}</p>
@@ -81,13 +80,6 @@ export default function AdminLayout() {
       icon: InboxStackIcon,
       current: selectedSection === 'Products',
       onClick: e => handleNavigationClick('Products', e),
-    },
-    {
-      name: 'Logs',
-      href: '#',
-      icon: DocumentTextIcon,
-      current: selectedSection === 'Logs',
-      onClick: e => handleNavigationClick('Logs', e),
     },
   ]
 
