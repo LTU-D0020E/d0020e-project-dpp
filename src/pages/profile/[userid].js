@@ -1,14 +1,10 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
 import React, { useState, useEffect } from 'react'
 import LayoutGlobal from '@/components/Layout/LayoutGlobal'
 import { Container } from '@/components/utils/Container'
 import { UserIcon } from '@heroicons/react/24/outline'
-import { PencilIcon } from '@heroicons/react/24/outline'
 import { Cog6ToothIcon } from '@heroicons/react/24/outline'
 import { ClipboardDocumentListIcon } from '@heroicons/react/24/outline'
 import { QrCodeIcon } from '@heroicons/react/24/outline'
-import ReactModal from 'react-modal'
 import { useSession } from 'next-auth/react'
 import useSWR from 'swr'
 import { useRouter } from 'next/router'
@@ -28,11 +24,41 @@ export default function Profile() {
     isValidating,
   } = useSWR(userid ? `/api/v1/users/me/${userid}` : null)
 
-  // These lines should be at the top, before any conditional logic
+  // State for handling page number
   const [activePage, setActivePage] = useState(1)
+
   const handleButtonClick = pageNumber => {
     setActivePage(pageNumber)
   }
+
+  const createScan = async () => {
+    try {
+      // Perform the scan creation API call here
+      const response = await fetch('/api/v1/scans', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userid: userid,
+          // You may need to pass additional data related to the scan
+        }),
+      })
+      if (!response.ok) {
+        throw new Error('Failed to create scan')
+      }
+      // Optionally, you can handle success response here
+      console.log('Scan created successfully')
+    } catch (error) {
+      console.error('Error creating scan:', error)
+      // Handle error
+    }
+  }
+
+  // Fetch scans data
+  const { data: scans, error: scansError } = useSWR(
+    session ? '/api/v1/scans' : null
+  )
 
   // Conditional rendering logic should come after hook calls
   if (isValidating) {
@@ -93,7 +119,7 @@ export default function Profile() {
           <div className='mx-20 h-[30vw] w-full'>
             {activePage === 1 && <Account user={user} />}
             {activePage === 2 && <Settings user={user} />}
-            {activePage === 3 && <Scans user={user} />}
+            {activePage === 3 && <Scans scans={scans.scans} />}
             {activePage === 4 && <Event user={user} />}
           </div>
         </div>
