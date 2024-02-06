@@ -4,8 +4,8 @@ import Product from '@/models/Product'
 import Scan from '@/models/Scans'
 
 const postScans = async (req, res, session) => {
-  console.log('Här är vår session: ', session)
-  console.log('Här är vår request: ', req.query)
+  /* console.log('Här är vår session: ', session)
+  console.log('Här är vår request: ', req.query) */
 
   if (!session) {
     return unauthorized(res)
@@ -15,7 +15,7 @@ const postScans = async (req, res, session) => {
   const fetchedUser = await User.findOne({ email: session.user.email })
   const fetchedUserId = fetchedUser._id.toString()
 
-  console.log(productId)
+  /* console.log(productId) */
 
   try {
     if (!productId) {
@@ -43,8 +43,8 @@ const postScans = async (req, res, session) => {
 }
 
 const getScans = async (req, res, session) => {
-  console.log('Här är vår session: ', session)
-  console.log('Här är vår request: ', req.query)
+  /* console.log('Här är vår session: ', session)
+  console.log('Här är vår request: ', req.query) */
 
   if (!session) {
     return unauthorized(res)

@@ -1,7 +1,45 @@
 import { PencilIcon } from '@heroicons/react/24/outline'
-import ReactModal from 'react-modal'
+import { useState } from 'react'
 
-export default function Settings({ user }) {
+export default function Settings({ user, userid }) {
+  // State variables to manage edit mode for each form field
+  const [editMode, setEditMode] = useState(false)
+  const [editedName, setEditedName] = useState(user.name)
+  const [editedEmail, setEditedEmail] = useState(user.email)
+  const [editedPassword, setEditedPassword] = useState('')
+  const [editedCompany, setEditedCompany] = useState('')
+
+  // Function to handle form submission
+  const handleSubmit = editModeSetter => {
+    // Make an API call to update user information
+    fetch(`/api/v1/users/me/${userid}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: editedName,
+        email: editedEmail,
+      }),
+    })
+      .then(response => {
+        if (response.ok) {
+          console.log('User information updated successfully')
+          // Handle any UI updates or notifications indicating success
+        } else {
+          console.error('Failed to update user information')
+          // Handle error scenario
+        }
+      })
+      .catch(error => {
+        console.error('Error updating user information:', error)
+      })
+      .finally(() => {
+        // Always reset edit mode regardless of success or failure
+        editModeSetter(false)
+      })
+  }
+
   return (
     <div className=''>
       <div>
@@ -22,20 +60,17 @@ export default function Settings({ user }) {
               <form className='flex flex-row justify-between sm:col-span-1 sm:mt-0'>
                 <div className='text-sm leading-6 text-gray-700'>
                   <input
-                    className='w-[200px] rounded-lg p-1'
+                    className={`w-[200px] rounded-lg p-1 ${
+                      editMode ? '' : 'bg-gray-200'
+                    }`}
                     type='text'
                     id='name'
-                    value={user.name} /* Name */
+                    value={editedName} /* Name */
+                    onChange={e =>
+                      setEditedName(e.target.value)
+                    } /* Update edited name */
+                    disabled={!editMode}
                   />
-                </div>
-                <div className='mx-[110px] text-sm leading-6 text-gray-700'>
-                  <button
-                    type='submit'
-                    className='flex cursor-pointer flex-row rounded-xl bg-zinc-200 px-3 py-1 transition duration-300 ease-in-out hover:bg-teal-600 hover:text-zinc-100'
-                  >
-                    <PencilIcon className='mr-2 mt-[4px] h-4' />
-                    <p className='font-bold'>Edit</p>
-                  </button>
                 </div>
               </form>
             </div>
@@ -46,20 +81,17 @@ export default function Settings({ user }) {
               <form className='flex flex-row justify-between sm:col-span-1 sm:mt-0'>
                 <div className='text-sm leading-6 text-gray-700'>
                   <input
-                    className='w-[200px] rounded-lg p-1'
+                    className={`w-[200px] rounded-lg p-1 ${
+                      editMode ? '' : 'bg-gray-200'
+                    }`}
                     type='text'
                     id='name'
-                    value={user.email} /* Email */
+                    value={editedEmail} /* Email */
+                    onChange={e =>
+                      setEditedEmail(e.target.value)
+                    } /* Update edited email */
+                    disabled={!editMode}
                   />
-                </div>
-                <div className='mx-[110px] text-sm leading-6 text-gray-700'>
-                  <button
-                    type='submit'
-                    className='flex cursor-pointer flex-row rounded-xl bg-zinc-200 px-3 py-1 transition duration-300 ease-in-out hover:bg-teal-600 hover:text-zinc-100'
-                  >
-                    <PencilIcon className='mr-2 mt-[4px] h-4' />
-                    <p className='font-bold'>Edit</p>
-                  </button>
                 </div>
               </form>
             </div>
@@ -70,20 +102,17 @@ export default function Settings({ user }) {
               <form className='flex flex-row justify-between sm:col-span-1 sm:mt-0'>
                 <div className='text-sm leading-6 text-gray-700'>
                   <input
-                    className='w-[200px] rounded-lg p-1'
+                    className={`w-[200px] rounded-lg p-1 ${
+                      editMode ? '' : 'bg-gray-200'
+                    }`}
                     type='text'
                     id='name'
-                    value={user.name} /* Password */
+                    value={editedPassword} /* Password */
+                    onChange={e =>
+                      setEditedPassword(e.target.value)
+                    } /* Update edited password */
+                    disabled={!editMode}
                   />
-                </div>
-                <div className='mx-[110px] text-sm leading-6 text-gray-700'>
-                  <button
-                    type='submit'
-                    className='flex cursor-pointer flex-row rounded-xl bg-zinc-200 px-3 py-1 transition duration-300 ease-in-out hover:bg-teal-600 hover:text-zinc-100'
-                  >
-                    <PencilIcon className='mr-2 mt-[4px] h-4' />
-                    <p className='font-bold'>Edit</p>
-                  </button>
                 </div>
               </form>
             </div>
@@ -94,25 +123,38 @@ export default function Settings({ user }) {
               <form className='flex flex-row justify-between sm:col-span-1 sm:mt-0'>
                 <div className='text-sm leading-6 text-gray-700'>
                   <input
-                    className='w-[200px] rounded-lg p-1'
+                    className={`w-[200px] rounded-lg p-1 ${
+                      editMode ? '' : 'bg-gray-200'
+                    }`}
                     type='text'
                     id='name'
-                    value='Luleå Tekniska Universitet'
+                    value={editedCompany} /* Placeholder */
+                    onChange={e =>
+                      setEditedCompany(e.target.value)
+                    } /* Update edited placeholder */
+                    disabled={!editMode}
                   />
-                </div>
-                <div className='mx-[110px] text-sm leading-6 text-gray-700'>
-                  <button
-                    type='submit'
-                    className='flex cursor-pointer flex-row rounded-xl bg-zinc-200 px-3 py-1 transition duration-300 ease-in-out hover:bg-teal-600 hover:text-zinc-100'
-                  >
-                    <PencilIcon className='mr-2 mt-[4px] h-4' />
-                    <p className='font-bold'>Edit</p>
-                  </button>
                 </div>
               </form>
             </div>
           </dl>
         </div>
+      </div>
+      <div className='mx-[20%] text-sm leading-6 text-gray-700'>
+        <button
+          type='button' // Change type to button
+          onClick={() => {
+            if (editMode) {
+              handleSubmit(setEditMode)
+            } else {
+              setEditMode(!editMode)
+            }
+          }} // Toggle edit mode or submit form
+          className='flex cursor-pointer flex-row rounded-xl bg-zinc-200 px-3 py-1 transition duration-300 ease-in-out hover:bg-teal-600 hover:text-zinc-100'
+        >
+          <PencilIcon className='mr-2 mt-[4px] h-4' />
+          <p className='font-bold'>{editMode ? 'Submit' : 'Edit'}</p>
+        </button>
       </div>
     </div>
   )

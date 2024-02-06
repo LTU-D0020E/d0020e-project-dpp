@@ -32,8 +32,8 @@ export default function Scans({ scans }) {
       </div>
       <table className='my-8 w-[100%] text-left'>
         <thead>
-          <tr className='text-gray-700'>
-            <th className='border-b-1 p-[8px]'>Product</th>
+          <tr className='border-b-[1px] text-gray-700'>
+            <th>Product</th>
             <th>Product ID</th>
             <th>Date Scanned</th>
             <th></th>
@@ -42,7 +42,10 @@ export default function Scans({ scans }) {
         <tbody>
           {scans ? (
             scans.map(scan => (
-              <tr key={scan._id} className='text-gray-700 hover:bg-[#0f8a8086]'>
+              <tr
+                key={scan._id}
+                className='border-b-[1px] text-gray-700 hover:bg-[#0f8a8086]'
+              >
                 <td>{scan.product.name}</td>
                 <td>{scan.product._id}</td>
                 <td>{formatDate(scan.createdAt)}</td>

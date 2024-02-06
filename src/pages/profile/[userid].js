@@ -71,8 +71,6 @@ export default function Profile() {
     return <div>No user data available</div>
   }
 
-  console.log(user.name)
-
   return (
     <LayoutGlobal>
       <Container>
@@ -118,7 +116,7 @@ export default function Profile() {
           <div className='border-r-1 h-full border border-zinc-200'></div>
           <div className='mx-20 h-[30vw] w-full'>
             {activePage === 1 && <Account user={user} />}
-            {activePage === 2 && <Settings user={user} />}
+            {activePage === 2 && <Settings user={user} userid={userid} />}
             {activePage === 3 && <Scans scans={scans.scans} />}
             {activePage === 4 && <Event user={user} />}
           </div>
