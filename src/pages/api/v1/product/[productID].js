@@ -5,13 +5,13 @@ import Product from '@/models/Product'
 const getProductById = async (req, res) => {
   console.log('heres the req', req.query)
   try {
-    const { productID } = req.query
-    console.log('heres the productid', productID)
-    if (!ObjectId.isValid(productID)) {
+    const { productId } = req.query
+    console.log('heres the productid', productId)
+    if (!ObjectId.isValid(productId)) {
       return res.status(400).json({ message: 'Invalid ID' })
     }
 
-    const productData = await Product.findOne({ _id: new ObjectId(productID) })
+    const productData = await Product.findOne({ _id: new ObjectId(productId) })
 
     if (!productData) {
       return res.status(404).json({ message: 'Product not found' })

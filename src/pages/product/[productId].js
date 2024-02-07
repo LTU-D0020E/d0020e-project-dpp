@@ -14,7 +14,7 @@ export async function getServerSideProps(context) {
 
   try {
     console.log(`Fetching URL: ${fetchUrl}`)
-    const res = await fetch('this is our fetchurl', fetchUrl)
+    const res = await fetch(fetchUrl)
 
     if (!res.ok) {
       throw new Error(`Failed to fetch product, status: ${res.status}`)
@@ -33,69 +33,7 @@ export async function getServerSideProps(context) {
   }
 }
 
-const extractObjects = data => {
-  const events = []
-  const components = []
-
-  const processObject = obj => {
-    for (const key in obj) {
-      if (typeof obj[key] === 'object') {
-        if (isEventObject(obj[key])) {
-          events.push({
-            id: obj[key].id,
-            dpp_class: obj[key].dpp_class,
-            creation_time: obj[key].creation_time,
-            action: obj[key].action,
-          })
-
-          const objects = extractObjects(obj[key])
-          if (objects.hasEvents.length > 0) {
-            events[events.length - 1].subcomponents = objects.hasEvents
-          }
-        } else if (isComponentObject(obj[key])) {
-          // Handle component object logic
-          const componentData = {
-            id: obj[key].id,
-            dpp_class: obj[key].dpp_class,
-            name: obj[key].name,
-            _id: obj[key]._id,
-          }
-          components.push(componentData)
-
-          const subcomponents = extractObjects(obj[key])
-          if (subcomponents.hasEvents.length > 0) {
-            componentData.subcomponents = subcomponents.hasEvents
-          }
-        } else {
-          const subcomponents = extractObjects(obj[key])
-          events.push(...subcomponents.hasEvents)
-          components.push(...subcomponents.componentObjects)
-        }
-      }
-    }
-  }
-
-  const isEventObject = obj => {
-    return obj.hasOwnProperty('action')
-    // Add any additional conditions for the 'has_event' object if needed
-  }
-
-  const isComponentObject = obj => {
-    // Change the condition to check if the object has a 'name' property
-    return obj.hasOwnProperty('name')
-  }
-
-  processObject(data)
-
-  return {
-    hasEvents: events,
-    componentObjects: components,
-  }
-}
-
 function ProductDetails({ product }) {
-  const nestedObjects = extractObjects(product)
-
   return (
     <LayoutGlobal>
       <Container className={'pt-20'}>
@@ -148,33 +86,32 @@ function ProductDetails({ product }) {
                   </div>
                 )}
                 <div className='flex flex-col space-y-4'>
-                  {nestedObjects.hasEvents.length > 0 && (
-                    <details className='rounded-lg p-6 open:bg-white open:shadow-lg open:ring-1 open:ring-black/5 dark:open:bg-slate-900 dark:open:ring-white/10'>
-                      <summary className='select-none text-sm font-semibold leading-6 text-slate-900 dark:text-white'>
+                  {product.event_trail.events.length > 0 && (
+                    <details className='rounded-lg bg-white p-6 open:shadow-lg open:ring-1 open:ring-black/5 '>
+                      <summary className='select-none text-sm font-semibold leading-6 text-slate-900'>
                         Events
                       </summary>
-                      <div className='mt-3 text-sm leading-6 text-slate-600 dark:text-slate-400'>
-                        {nestedObjects.hasEvents.map((component, index) => (
+                      <div className='mt-3 text-sm leading-6 text-slate-600 '>
+                        {product.event_trail.events.map((event, index) => (
                           <div key={index}>
-                            <p>ID: {component.id}</p>
+                            <p>ID: {event.id}</p>
                             <p>
-                              Creation Time:{' '}
-                              {formatDate(component.creation_time)}
+                              Creation Time: {formatDate(event.creation_time)}
                             </p>
-                            <p>Action: {component.action}</p>
+                            <p>Action: {event.action}</p>
                             <br></br>
                           </div>
                         ))}
                       </div>
                     </details>
                   )}
-                  {nestedObjects.componentObjects.length > 0 && (
-                    <details className='rounded-lg p-6 open:bg-white open:shadow-lg open:ring-1 open:ring-black/5 dark:open:bg-slate-900 dark:open:ring-white/10'>
-                      <summary className='select-none text-sm font-semibold leading-6 text-slate-900 dark:text-white'>
+                  {product.key_components.components.length > 0 && (
+                    <details className='rounded-lg bg-white p-6 open:shadow-lg open:ring-1 open:ring-black/5 '>
+                      <summary className='select-none text-sm font-semibold leading-6 text-slate-900'>
                         Key components
                       </summary>
-                      <div className='mt-3 text-sm leading-6 text-slate-600 dark:text-slate-400'>
-                        {nestedObjects.componentObjects.map(
+                      <div className='mt-3 text-sm leading-6 text-slate-600 '>
+                        {product.key_components.components.map(
                           (component, index) => (
                             <div key={index}>
                               <p>ID: {component.id}</p>
@@ -182,13 +119,12 @@ function ProductDetails({ product }) {
                               <p>
                                 Name:&nbsp;
                                 <Link
-                                  className='text-teal-600'
+                                  className='font-semibold text-teal-600'
                                   href={`/product/${component._id}`}
                                 >
                                   {component.name}
                                 </Link>
                               </p>
-                              <br></br>
                             </div>
                           )
                         )}

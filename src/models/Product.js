@@ -45,7 +45,7 @@ const productSchema = new Schema(
     },
     key_components: {
       privacy: String,
-      component: [componentSchema],
+      components: [componentSchema],
     },
     crm: {
       id: Number,
@@ -54,7 +54,7 @@ const productSchema = new Schema(
     },
     event_trail: {
       privacy: String,
-      event: [eventSchema], // Define a separate schema for events
+      events: [eventSchema], // Define a separate schema for events
     },
   },
   { strict: false }
