@@ -2,15 +2,12 @@ import mongoose from 'mongoose'
 
 const Schema = mongoose.Schema
 
-const eventSchema = new Schema(
-  {
-    id: Number,
-    dpp_class: String,
-    creation_time: Date, // Assuming this should be a Date type
-    action: String,
-  },
-  { _id: false }
-)
+const eventSchema = new Schema({
+  id: Number,
+  dpp_class: String,
+  creation_time: Date, // Assuming this should be a Date type
+  action: String,
+})
 
 const componentSchema = new Schema(
   {
