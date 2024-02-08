@@ -57,8 +57,8 @@ export default function DropdownMenu() {
             <div className='py-1'>
               <Menu.Item>
                 {({ active }) => (
-                  <a
-                    href='#'
+                  <Link
+                    href='/profile'
                     className={classNames(
                       active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                       'block px-4 py-2 text-sm'
@@ -68,7 +68,7 @@ export default function DropdownMenu() {
                       <Cog6ToothIcon className='h-5 text-gray-800' />
                       <p>Account settings</p>
                     </div>
-                  </a>
+                  </Link>
                 )}
               </Menu.Item>
             </div>
@@ -77,7 +77,7 @@ export default function DropdownMenu() {
             <div className='py-1'>
               <Menu.Item>
                 {({ active }) => (
-                  <a
+                  <Link
                     href='#'
                     className={classNames(
                       active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
@@ -88,7 +88,7 @@ export default function DropdownMenu() {
                       <ExclamationCircleIcon className='h-5 text-gray-800' />
                       <p>Example link</p>
                     </div>
-                  </a>
+                  </Link>
                 )}
               </Menu.Item>
             </div>
