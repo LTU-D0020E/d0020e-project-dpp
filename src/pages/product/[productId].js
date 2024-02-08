@@ -87,8 +87,9 @@ function ProductDetails({ product }) {
                 You are qualified to add events
               </h1>
               <p className='pb-6 pt-2 text-center text-xs text-gray-500'>
-                If you've performed something that's altered the product please
-                state it and submit the form
+                {
+                  "If you've performed something that's altered the product please state it and submit the form"
+                }
               </p>
               <TextField
                 label='Event Action'
