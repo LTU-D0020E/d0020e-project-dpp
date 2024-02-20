@@ -104,11 +104,11 @@ export default function AuthForm() {
       <div className='flex h-screen flex-col items-center justify-center bg-gray-200'>
         <div className={`container ${isSignUpVisible ? '' : 'active'}`}>
           <div
-            className={`form-container sign-up ${
+            className={`form-container sign-up  ${
               isSignUpVisible ? '' : 'active'
             }`}
           >
-            <form onSubmit={handleSignUp}>
+            <form className='text-black' onSubmit={handleSignUp}>
               <h1>Create Account</h1>
               <span>or use your email for registration</span>
               <input
@@ -147,7 +147,7 @@ export default function AuthForm() {
               !isSignUpVisible ? '' : 'active'
             }`}
           >
-            <form onSubmit={handleSignIn}>
+            <form className='text-black' onSubmit={handleSignIn}>
               <h1>Sign In</h1>
               <span>or use your email password</span>
               <input

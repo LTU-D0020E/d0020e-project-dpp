@@ -6,6 +6,7 @@ import { HomeIcon } from '@heroicons/react/24/outline'
 import Example from '../UI/Forms/UserDropdown'
 import SearchBar from './SearchBar'
 import Link from 'next/link'
+import { QrCodeIcon } from '@heroicons/react/24/solid'
 
 export function NavbarGlobal({ searchBar = true, navClassName }) {
   const router = useRouter()
@@ -18,33 +19,21 @@ export function NavbarGlobal({ searchBar = true, navClassName }) {
           {/* Left Section for Home Icon */}
           <div className='relative flex h-full items-center justify-center'>
             <Link href='/' className='flex h-full items-center'>
-              <HomeIcon className='h-14 cursor-pointer rounded-full p-2 text-gray-800 transition duration-200 ease-in-out hover:text-teal-600' />
+              <HomeIcon className='h-14 cursor-pointer p-2 text-gray-800 transition duration-200 ease-in-out hover:text-teal-600' />
             </Link>
           </div>
 
           {/* Conditionally render SearchBar */}
           {searchBar && (
-            <div className='absolute left-0 right-0 mx-auto w-max'>
+            <div className='mx-auto w-max'>
               <SearchBar />
             </div>
           )}
+          <QrCodeIcon className='h-14 cursor-pointer p-2 text-gray-800 transition duration-200 ease-in-out hover:text-teal-600' />
 
           {/* Right Section for Navigation Links */}
-          <div className='flex items-center'>
-            <a
-              href='#'
-              className='nav-links h-full cursor-pointer rounded-full p-2 font-semibold transition duration-200 ease-in-out hover:text-teal-600'
-            >
-              Categories
-            </a>
-            <a
-              href='#'
-              className='nav-links h-full cursor-pointer rounded-full p-2 font-semibold transition duration-200 ease-in-out hover:text-teal-600'
-            >
-              Resources
-            </a>
-            <Example />
-          </div>
+
+          <Example />
         </Container>
       </nav>
     </header>
