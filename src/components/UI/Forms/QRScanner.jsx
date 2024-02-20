@@ -39,7 +39,11 @@ const QRScanner = () => {
     }, 100) // Scan every 100 milliseconds
 
     return () => {
-      clearInterval(scanningInterval)
+      return () => {
+        clearInterval(scanningInterval)
+        const tracks = videoRef.current.srcObject.getTracks()
+        tracks.forEach(track => track.stop())
+      }
     }
   }, [])
 
