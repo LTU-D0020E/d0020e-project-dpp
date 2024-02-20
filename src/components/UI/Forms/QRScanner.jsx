@@ -45,8 +45,9 @@ const QRScanner = () => {
 
   return (
     <div>
-      <video ref={videoRef} style={{ display: 'none' }}></video>
-      <canvas ref={canvasRef} style={{ display: 'none' }}></canvas>
+      <video ref={videoRef} style={{ width: '100%' }}></video>
+
+      <canvas ref={canvasRef} style={{ width: '100%' }}></canvas>
       {qrCode && <p>QR Code Detected: {qrCode}</p>}
     </div>
   )
