@@ -18,7 +18,7 @@ export default function Scanner() {
       <Container>
         <MobileView>
           <div className='flex flex-col items-center justify-center pt-4'>
-            <div className='w-2/5'>
+            <div className='w-full'>
               <QrScanner
                 onDecode={result => console.log(result)}
                 onError={error => console.log(error?.message)}
