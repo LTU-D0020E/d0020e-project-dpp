@@ -1,6 +1,7 @@
 import LayoutGlobal from '@/components/Layout/LayoutGlobal'
 import { Container } from '@/components/utils/Container'
 import { BrowserView, MobileView } from 'react-device-detect'
+import { useRouter } from 'next/router'
 import { useState } from 'react'
 import dynamic from 'next/dynamic'
 
@@ -18,9 +19,19 @@ export default function Scanner() {
 
   // Handle the decoded result
   const handleDecode = result => {
-    console.log(result)
-    setDecodedResult(result) // Update state with the decoded result
+    try {
+      const obj = JSON.parse(result) // Assuming result is a JSON string
+      const oid = obj?._id?.$oid // Extract the oid
+      if (oid) {
+        router.push(`/product/${oid}`) // Navigate to the specific product page
+      } else {
+        console.error('OID not found in the scanned result')
+      }
+    } catch (error) {
+      console.error('Error parsing QR code result:', error)
+    }
   }
+
   return (
     <LayoutGlobal>
       <Container>
@@ -31,15 +42,6 @@ export default function Scanner() {
                 onDecode={handleDecode}
                 onError={error => console.log(error?.message)}
                 audio={false}
-              />
-            </div>
-            <div className='mt-4 w-full'>
-              <input
-                type='text'
-                className='form-input mt-1 block w-full'
-                value={decodedResult} // Display the decoded result here
-                onChange={e => setDecodedResult(e.target.value)} // Allows editing the result if needed
-                placeholder='Decoded QR code result'
               />
             </div>
           </div>
