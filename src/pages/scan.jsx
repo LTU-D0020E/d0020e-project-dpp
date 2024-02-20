@@ -13,24 +13,34 @@ const QrScanner = dynamic(
 )
 
 export default function Scanner() {
+  // State to hold the decoded result
+  const [decodedResult, setDecodedResult] = useState('')
+
+  // Handle the decoded result
+  const handleDecode = result => {
+    console.log(result)
+    setDecodedResult(result) // Update state with the decoded result
+  }
+
   return (
-    <LayoutGlobal>
-      <Container>
-        <MobileView>
-          <div className='flex flex-col items-center justify-center pt-4'>
-            <div className='w-full'>
-              <QrScanner
-                onDecode={result => console.log(result)}
-                onError={error => console.log(error?.message)}
-                audio={false}
-              />
-            </div>
-          </div>
-        </MobileView>
-        <BrowserView>
-          <h1>To scan a QR code please open on mobile</h1>
-        </BrowserView>
-      </Container>
-    </LayoutGlobal>
+    <div className='flex flex-col items-center justify-center pt-4'>
+      <div className='w-full'>
+        <QrScanner
+          onDecode={handleDecode}
+          onError={error => console.log(error?.message)}
+          audio={false}
+        />
+      </div>
+      {/* Input box to display the decoded result */}
+      <div className='mt-4 w-full'>
+        <input
+          type='text'
+          className='form-input mt-1 block w-full'
+          value={decodedResult} // Display the decoded result here
+          onChange={e => setDecodedResult(e.target.value)} // Allows editing the result if needed
+          placeholder='Decoded QR code result'
+        />
+      </div>
+    </div>
   )
 }
