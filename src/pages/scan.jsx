@@ -15,7 +15,7 @@ const QrScanner = dynamic(
 )
 
 export default function Scanner() {
-  const [decodedResult, setDecodedResult] = useState('')
+  const router = useRouter()
 
   // Handle the decoded result
   const handleDecode = result => {
