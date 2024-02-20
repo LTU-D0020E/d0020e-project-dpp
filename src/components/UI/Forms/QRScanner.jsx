@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react'
-import jsQR from 'jsqr'
+import jsQR from 'jsqr-es6'
 
 const QRScanner = () => {
   const videoRef = useRef(null)
