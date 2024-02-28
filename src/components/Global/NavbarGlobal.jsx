@@ -29,8 +29,9 @@ export function NavbarGlobal({ searchBar = true, navClassName }) {
               <SearchBar />
             </div>
           )}
-          <QrCodeIcon className='h-14 cursor-pointer p-2 text-gray-800 transition duration-200 ease-in-out hover:text-teal-600' />
-
+          <Link href='/scan' className='flex h-full items-center'>
+            <QrCodeIcon className='h-14 cursor-pointer p-2 text-gray-800 transition duration-200 ease-in-out hover:text-teal-600' />
+          </Link>
           {/* Right Section for Navigation Links */}
 
           <Example />

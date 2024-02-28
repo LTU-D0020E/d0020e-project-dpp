@@ -4,8 +4,10 @@ import clsx from 'clsx'
 import SearchField from '../UI/Forms/SearchField'
 import SearchResultCard from '../UI/global/SearchResultCard'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 export default function SearchBar({ className, ...props }) {
+  const router = useRouter()
   const [searchTerm, setSearchTerm] = useState('')
   const [searchResult, setSearchResult] = useState([])
   const [loading, setLoading] = useState(false)
@@ -56,6 +58,11 @@ export default function SearchBar({ className, ...props }) {
     setShowSearchResults(false)
   }
 
+  const handleSearchSelect = url => {
+    router.push(url)
+    handleBlur()
+  }
+
   return (
     <div className={clsx('relative', className)}>
       <div className='relative w-full'>
@@ -89,6 +96,8 @@ export default function SearchBar({ className, ...props }) {
                 return (
                   <li
                     key={uniqueKey}
+                    onClick={() => handleSearchSelect('/product/' + item._id)}
+                    onMouseDown={e => e.preventDefault()}
                     className='flex flex-row items-center space-x-4 p-2 hover:bg-gray-100'
                   >
                     <SearchResultCard item={item} />
