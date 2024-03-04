@@ -25,6 +25,7 @@ const createKeypair = async (req, res) => {
 
 const getPrivByPub = async (req, res) => {
   const { publicKey } = req.query
+  console.log(publicKey)
   try {
     const doc = await KeyDocument.findOne({
       $or: [
