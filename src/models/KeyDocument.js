@@ -23,5 +23,5 @@ const KeyDocumentSchema = new Schema({
 })
 
 module.exports =
-  mongoose.models.KeyDocumentSchema ||
+  mongoose.models.KeyDocument ||
   mongoose.model('KeyDocument', KeyDocumentSchema)
