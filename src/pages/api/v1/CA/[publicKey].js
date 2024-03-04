@@ -1,3 +1,6 @@
+import { defaultHandler } from '@/utils/server/api-helpers'
+import KeyDocument from '@/models/KeyDocument'
+
 const getPrivByPub = async (req, res) => {
   const { publicKey } = req.query
   console.log(req.query)
