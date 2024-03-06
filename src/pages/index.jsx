@@ -2,6 +2,7 @@ import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import LayoutGlobal from '@/components/Layout/LayoutGlobal'
 import SearchBar from '@/components/Global/SearchBar'
+import { useSession } from 'next-auth/react'
 
 const inter = Inter({ subsets: ['latin'] })
 

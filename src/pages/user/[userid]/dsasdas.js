@@ -18,6 +18,7 @@ export default function Profile() {
   const userid = router.query.userid
 
   const { data: session } = useSession()
+  console.log(session)
   const {
     data: user,
     error,
