@@ -25,7 +25,7 @@ export function NavbarGlobal({ searchBar = true, navClassName }) {
 
           {/* Conditionally render SearchBar */}
           {searchBar && (
-            <div className='mx-auto w-max'>
+            <div className='z-30 mx-auto w-[500px]'>
               <SearchBar />
             </div>
           )}
