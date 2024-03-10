@@ -104,15 +104,6 @@ export default function Profile() {
               <QrCodeIcon className='mr-2 mt-[2px] h-5' />
               Scanned products
             </button>
-            <button
-              className={`my-1 flex w-[90%] flex-row rounded-md p-2 text-left font-bold text-zinc-600 transition duration-200 ${
-                activePage === 4 ? 'active' : ''
-              }`}
-              onClick={() => handleButtonClick(4)}
-            >
-              <ClipboardDocumentListIcon className='mr-2 mt-[2px] h-5' />
-              Events
-            </button>
           </div>
           <div className='border-r-1 h-full border border-zinc-200'></div>
           <div className='mx-20 h-[30vw] w-full'>
