@@ -1,26 +1,32 @@
 import { defaultHandler } from '@/utils/server/api-helpers'
-import Product from '@/models/Product'
+import KeyDocument from '@/models/KeyDocument'
+import { fetchDataFromIPFS } from '@/utils/server/ipfs-api-helpers'
 
-const searchProducts = async (req, res) => {
+const searchByCID = async (req, res) => {
   const { query } = req.query
 
   try {
-    const products = await Product.find({
-      $or: [
-        {
-          name: { $regex: query, $options: 'i' },
-        },
-        {
-          'manufactured_by.owner_name': { $regex: query, $options: 'i' },
-        },
-      ],
-    }).select('name dpp_class manufactured_by _id')
+    const regex = new RegExp('^' + query, 'i')
+    const documents = await KeyDocument.find({ cid: { $regex: regex } })
 
-    res.status(200).json(products)
+    const fetchPromises = documents.map(doc => {
+      return fetchDataFromIPFS(doc.cid)
+        .then(data => ({ ...data, cid: doc.cid })) // Attach the CID here
+        .catch(error => ({ error: error.message, cid: doc.cid }))
+    })
+
+    const ipfsResults = await Promise.all(fetchPromises)
+
+    const successfulResults = ipfsResults.filter(result => !result.error)
+    const errorResults = ipfsResults.filter(result => result.error)
+
+    res.status(200).json({
+      successful: successfulResults,
+      errors: errorResults,
+    })
   } catch (error) {
-    res
-      .status(500)
-      .json({ error: 'An error occurred while fetching search results' })
+    console.error('Error during search:', error)
+    res.status(500).json({ error: 'An error occurred during the search.' })
   }
 }
 
@@ -29,7 +35,7 @@ const handler = async (req, res) =>
     req,
     res,
     {
-      GET: searchProducts,
+      GET: searchByCID,
     },
     {
       requiresAuth: false,

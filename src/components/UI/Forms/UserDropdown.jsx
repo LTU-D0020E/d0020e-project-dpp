@@ -58,15 +58,15 @@ export default function DropdownMenu() {
               <Menu.Item>
                 {({ active }) => (
                   <Link
-                    href='/profile'
+                    href={`/user/${session.user._id}`} // Link to your account settings page
                     className={classNames(
                       active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                       'block px-4 py-2 text-sm'
                     )}
                   >
                     <div className='flex flex-row items-center space-x-4'>
-                      <Cog6ToothIcon className='h-5 text-gray-800' />
-                      <p>Account settings</p>
+                      <UserIcon className='h-5 text-gray-800' />
+                      <p>My Profile</p>
                     </div>
                   </Link>
                 )}
@@ -85,8 +85,8 @@ export default function DropdownMenu() {
                     )}
                   >
                     <div className='flex flex-row items-center space-x-4'>
-                      <ExclamationCircleIcon className='h-5 text-gray-800' />
-                      <p>Example link</p>
+                      <Cog6ToothIcon className='h-5 text-gray-800' />
+                      <p>Settings</p>
                     </div>
                   </Link>
                 )}

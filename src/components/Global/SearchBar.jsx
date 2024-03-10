@@ -14,12 +14,17 @@ export default function SearchBar({ className, ...props }) {
   const [showSearchResults, setShowSearchResults] = useState(false)
 
   const handleSearch = async () => {
+    if (searchTerm.trim() === '') {
+      setSearchResult([])
+      return
+    }
+
     setLoading(true)
 
     try {
       const response = await fetch(`/api/v1/search?query=${searchTerm}`)
       const data = await response.json()
-      setSearchResult(data)
+      setSearchResult(data.successful)
     } catch (error) {
       console.error('Error fetching search results:', error)
       setSearchResult([])
@@ -29,33 +34,23 @@ export default function SearchBar({ className, ...props }) {
   }
 
   useEffect(() => {
-    if (searchTerm.trim() !== '') {
+    const delayDebounce = setTimeout(() => {
       handleSearch()
-    } else {
-      setSearchResult([])
-    }
+    }, 300) // Add a debounce to reduce API calls
+
+    return () => clearTimeout(delayDebounce)
   }, [searchTerm])
 
   const handleInputChange = event => {
     setSearchTerm(event.target.value)
   }
 
-  const filteredResults = searchResult.filter(
-    item =>
-      item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      (item.manufactured_by &&
-        item.manufactured_by.owner_name
-          .toLowerCase()
-          .includes(searchTerm.toLowerCase())) ||
-      item.dpp_class.toLowerCase().includes(searchTerm.toLowerCase())
-  )
+  const handleBlur = () => {
+    setShowSearchResults(false)
+  }
 
   const handleSearchBoxSelect = () => {
     setShowSearchResults(true)
-  }
-
-  const handleBlur = () => {
-    setShowSearchResults(false)
   }
 
   const handleSearchSelect = url => {
@@ -82,17 +77,17 @@ export default function SearchBar({ className, ...props }) {
       </div>
       {showSearchResults && (
         <>
-          {filteredResults.length > 0 && (
+          {searchResult.length > 0 && (
             <ul
               className={`absolute left-0 top-16 w-full cursor-pointer rounded-md border border-transparent bg-white text-blue-900 shadow-lg`}
             >
-              {filteredResults.map((item, index) => {
+              {searchResult.map((item, index) => {
                 if (!item) {
                   return null
                 }
 
                 const uniqueKey = item._id || item.name + item.dpp_class + index
-                console.log(item)
+
                 return (
                   <li
                     key={uniqueKey}

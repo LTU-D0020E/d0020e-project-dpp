@@ -1,28 +1,40 @@
 import { defaultHandler } from '@/utils/server/api-helpers'
 import { ObjectId } from 'mongodb'
-import Product from '@/models/Product'
+import KeyDocument from '@/models/KeyDocument'
+import { fetchDataFromIPFS } from '@/utils/server/ipfs-api-helpers'
 
-const getProductById = async (req, res) => {
+const getProductByCid = async (req, res) => {
   console.log('heres the req', req.query)
+  const { cid } = req.query
   try {
-    const { productId } = req.query
-    console.log('heres the productid', productId)
-    if (!ObjectId.isValid(productId)) {
-      return res.status(400).json({ message: 'Invalid ID' })
-    }
+    console.log('heres the productid', cid)
+    const documents = await KeyDocument.find({ cid: cid })
 
-    const productData = await Product.findOne({ _id: new ObjectId(productId) })
+    // Fetch data from IPFS for each document CID
+    const fetchPromises = documents.map(doc => {
+      return new Promise((resolve, reject) => {
+        fetchDataFromIPFS(doc.cid, (error, data) => {
+          if (error) {
+            reject(error)
+          } else {
+            // Attach the CID to the data object
+            const responseData = {
+              ...data,
+              cid: doc.cid, // Include the CID in the response
+            }
+            resolve(responseData)
+          }
+        })
+      })
+    })
 
-    if (!productData) {
-      return res.status(404).json({ message: 'Product not found' })
-    }
+    // Resolve all promises to get the IPFS data
+    const ipfsResults = await Promise.all(fetchPromises)
 
-    res.status(200).json(productData)
+    res.status(200).json(ipfsResults)
   } catch (error) {
-    console.error('Error fetching product:', error)
-    return res
-      .status(500)
-      .json({ message: 'Internal server error', error: error.message })
+    console.error('Error during search:', error)
+    res.status(500).json({ error: 'An error occurred during the search.' })
   }
 }
 
@@ -69,7 +81,7 @@ const handler = async (req, res) =>
     req,
     res,
     {
-      GET: getProductById,
+      GET: getProductByCid,
       PUT: addEventToProduct,
     },
     {
